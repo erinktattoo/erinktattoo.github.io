@@ -1,0 +1,6 @@
+# ✏️ MODIFICAR: cambia erink.example.com por el dominio real de la web.
+User-agent: *
+Allow: /
+Disallow: /herramientas/
+
+Sitemap: https://erink.example.com/sitemap.xml

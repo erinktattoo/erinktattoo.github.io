@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!--
+  ===================================================================
+  PÁGINA EN INGLÉS. La versión en español es ../index.html.
+  Busca "MODIFICAR" (Ctrl+F) para ver cada dato de ejemplo.
+  Los textos de aquí son la traducción de los de index.html: si cambias
+  algo allí, cambia lo mismo aquí.
+
+  ✏️ MODIFICAR: "https://erink.example.com" es un dominio de ejemplo.
+  Cámbialo con "Buscar y reemplazar" (ver index.html).
+  ===================================================================
+-->
+
+<!-- ✏️ MODIFICAR: título y descripción que salen en Google, en inglés -->
+<title>ER·INK Tattoo Studio · Tattoo Artist in Pinar del Río, Cuba</title>
+<meta name="description" content="Custom tattoos in Pinar del Río, Cuba, and in Panama: realism, blackwork, fine line and neo-traditional. See the portfolio and upcoming guest spots, and book your appointment on WhatsApp.">
+
+<script>
+  // Idioma: usa el que eligió el visitante la última vez; si es su primera
+  // visita y su navegador está en español, lo lleva a la versión en español.
+  (function () {
+    var guardado;
+    try { guardado = localStorage.getItem("idioma"); } catch (e) {}
+    var esBot = /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|preview/i.test(navigator.userAgent);
+    var nav = ((navigator.languages && navigator.languages[0]) || navigator.language || "en").toLowerCase();
+    var quiere = guardado || (!esBot && nav.indexOf("es") === 0 ? "es" : "en");
+    if (quiere === "es") location.replace("../index.html" + location.hash);
+    var raiz = document.documentElement;
+    raiz.className += " js";
+    // Animaciones al bajar por la página (no si el móvil pide reducir movimiento).
+    // Si js/app.js no llega a cargar en 5 segundos, se muestra todo sin animar.
+    if ("IntersectionObserver" in window && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+      raiz.className += " animable";
+      setTimeout(function () { if (!window.erinkListo) raiz.classList.remove("animable"); }, 5000);
+    }
+  })();
+</script>
+
+<link rel="preload" href="../fuentes/erink-display.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fuentes/erink-type.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/estilos.css">
+
+<link rel="canonical" href="https://erink.example.com/en/">
+<link rel="alternate" hreflang="es" href="https://erink.example.com/">
+<link rel="alternate" hreflang="en" href="https://erink.example.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://erink.example.com/">
+
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ER·INK Tattoo Studio">
+<meta property="og:title" content="ER·INK Tattoo Studio · Pinar del Río, Cuba">
+<meta property="og:description" content="Realism, blackwork, fine line and neo-traditional. See the portfolio and book your appointment on WhatsApp.">
+<meta property="og:url" content="https://erink.example.com/en/">
+<meta property="og:image" content="https://erink.example.com/img/compartir.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ER·INK Tattoo Studio logo in red on black">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- ✏️ MODIFICAR: los mismos datos del estudio que en index.html -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TattooParlor",
+  "@id": "https://erink.example.com/#estudio",
+  "name": "ER·INK Tattoo Studio",
+  "description": "Tattoo studio in Pinar del Río, Cuba. Realism, blackwork, fine line and neo-traditional, with guest spots in Panama.",
+  "url": "https://erink.example.com/en/",
+  "image": "https://erink.example.com/img/compartir.jpg",
+  "logo": "https://erink.example.com/apple-touch-icon.png",
+  "telephone": "+53 5636 3391",
+  "email": "eri539880@gmail.com",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pinar del Río",
+    "addressRegion": "Pinar del Río",
+    "addressCountry": "CU"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 22.422028, "longitude": -83.7075 },
+  "areaServed": ["Cuba", "Panama"],
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "13:30",
+    "closes": "18:00"
+  }, {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Wednesday", "Sunday"],
+    "opens": "10:00",
+    "closes": "12:00"
+  }],
+  "sameAs": ["https://www.instagram.com/tats.erink/"],
+  "founder": { "@type": "Person", "name": "Erik Ramos", "jobTitle": "Tattoo artist" },
+  "knowsLanguage": ["es", "en"]
+}
+</script>
+</head>
+
+<body>
+<a class="saltar" href="#contenido">Skip to content</a>
+
+<!-- Íconos (los mismos que en index.html) -->
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Logo de ER·INK (el archivo original del tatuador, logo_kunai_circulo.svg) -->
+  <symbol id="i-logo" viewBox="-206 -11 2064 2064">
+    <path fill="currentColor" fill-rule="evenodd" d="M 815 11 C 802 13,798 14,790 20 C 786 22,781 25,778 26 C 765 31,753 41,738 62 C 728 75,727 77,723 88 C 713 114,710 140,714 158 C 715 162,717 170,718 175 C 719 180,721 186,722 189 C 724 191,727 197,728 201 C 732 209,743 222,761 239 C 770 248,773 249,782 251 C 797 256,806 262,810 269 C 811 273,811 278,811 322 C 811 401,810 417,809 422 C 804 441,791 453,772 456 C 768 457,763 457,761 458 C 757 458,750 464,748 469 C 747 471,747 480,747 508 C 747 527,747 579,746 622 C 746 666,745 746,745 800 L 745 900 747 907 C 748 911,751 917,754 920 C 760 930,764 937,766 945 C 767 951,768 953,772 957 C 774 960,776 964,777 966 C 777 968,779 974,781 980 C 785 997,786 1002,787 1014 C 789 1031,788 1046,786 1053 C 785 1057,783 1066,781 1074 C 779 1082,777 1091,776 1094 C 771 1106,762 1125,756 1135 C 745 1153,745 1153,748 1189 C 750 1203,751 1221,752 1230 C 754 1259,755 1271,758 1289 C 760 1299,761 1311,762 1317 C 762 1323,763 1333,763 1340 C 764 1348,765 1361,766 1370 C 767 1388,770 1414,773 1432 C 773 1438,775 1449,775 1458 C 776 1467,776 1480,777 1487 C 777 1494,778 1507,779 1515 C 779 1525,780 1531,781 1535 C 783 1540,783 1542,786 1576 C 787 1597,788 1607,790 1648 C 791 1658,792 1676,793 1690 C 794 1703,795 1723,796 1734 C 797 1746,798 1761,798 1768 C 799 1774,800 1788,801 1800 C 804 1849,805 1863,806 1874 C 807 1888,809 1909,810 1938 C 810 1950,812 1966,812 1976 C 813 1985,814 1996,814 1999 C 814 2006,818 2031,820 2032 C 821 2034,823 2032,824 2027 C 825 2024,827 2019,829 2016 C 832 2009,832 2009,835 1971 C 835 1955,837 1936,837 1929 C 838 1922,838 1909,839 1900 C 839 1892,841 1877,842 1866 C 843 1856,844 1843,845 1838 C 845 1832,846 1824,847 1820 C 847 1816,848 1809,848 1805 C 848 1801,848 1793,849 1786 C 849 1780,851 1765,851 1753 C 852 1741,853 1729,854 1727 C 855 1723,858 1695,859 1658 C 860 1643,861 1630,861 1629 C 862 1629,862 1623,863 1616 C 863 1609,865 1595,867 1585 C 870 1564,872 1551,873 1523 C 874 1502,876 1486,878 1472 C 879 1468,880 1460,881 1455 C 881 1450,882 1443,883 1439 C 883 1436,885 1424,885 1413 C 886 1402,887 1389,888 1384 C 889 1379,889 1368,890 1361 C 891 1354,892 1346,893 1343 C 893 1341,895 1331,896 1322 C 896 1312,898 1299,899 1292 C 899 1284,900 1272,901 1265 C 901 1258,903 1249,903 1246 C 904 1244,905 1234,906 1225 C 907 1216,908 1203,909 1197 C 909 1191,910 1179,911 1171 L 911 1156 907 1147 C 905 1142,903 1138,903 1137 C 903 1135,897 1122,891 1113 C 885 1102,883 1096,880 1080 C 878 1073,876 1063,875 1058 C 871 1041,873 1015,878 994 C 880 987,882 978,883 974 C 884 965,886 962,889 957 C 891 955,894 950,895 945 C 897 940,901 933,905 927 C 920 902,920 906,921 806 C 921 760,922 667,922 599 L 922 474 920 470 C 917 463,910 459,898 458 C 887 456,885 455,875 445 C 866 437,863 434,862 429 C 860 422,861 279,863 273 C 865 265,871 261,889 254 C 898 250,902 248,909 242 C 912 239,917 236,919 234 C 937 222,952 199,957 176 C 958 169,960 160,961 156 C 964 145,964 133,961 120 C 959 113,957 103,956 97 C 953 82,952 81,945 73 C 942 69,937 63,934 58 C 927 47,923 44,905 32 C 885 19,889 20,855 11 C 846 9,829 9,815 11 M 834 57 C 814 59,799 64,788 74 C 784 78,778 84,774 86 C 767 91,765 94,763 107 C 762 113,760 122,759 128 C 755 139,756 143,760 157 C 762 161,764 170,765 174 C 767 185,769 187,774 190 C 776 191,782 196,786 200 C 797 210,807 214,826 217 C 851 221,873 215,888 201 C 892 198,896 194,898 192 C 906 187,908 184,910 178 C 910 175,913 168,915 163 C 921 146,921 136,914 113 C 910 96,907 92,894 79 C 887 72,884 69,876 65 C 860 57,852 56,834 57 M 636 317 C 626 319,612 323,605 325 C 598 327,589 330,585 331 C 581 331,576 334,572 336 C 569 338,561 340,555 342 C 539 346,490 367,482 374 C 475 380,473 381,466 383 C 461 384,458 386,454 390 C 451 392,445 396,440 398 C 436 400,429 405,425 408 C 419 413,412 417,396 427 C 392 430,386 435,382 439 C 378 442,372 447,368 449 C 364 452,357 458,351 463 C 346 468,339 474,336 476 C 333 479,329 483,327 486 C 322 493,301 513,294 518 C 291 520,286 524,284 527 C 282 529,276 536,270 543 C 264 549,257 558,254 563 C 251 568,246 573,243 576 C 240 578,237 582,235 585 C 233 588,229 593,227 596 C 220 603,215 609,210 620 C 207 625,202 632,199 636 C 192 644,189 649,187 658 C 186 664,185 665,180 670 C 175 674,173 677,170 684 C 168 689,165 696,162 700 C 160 704,156 713,153 719 C 150 725,146 734,143 738 C 140 743,138 749,137 751 C 136 753,134 759,131 764 C 129 769,126 777,126 781 C 125 785,121 796,118 805 C 110 824,108 831,105 846 C 104 853,102 861,101 864 C 98 870,92 899,90 912 C 90 917,87 930,85 940 C 80 965,80 971,88 975 C 94 978,123 974,142 967 C 148 964,156 962,159 961 C 172 957,174 955,175 942 C 176 930,179 917,182 908 C 185 898,188 883,188 876 C 188 870,190 865,194 860 C 196 857,198 854,200 844 C 203 832,209 816,216 800 C 219 794,222 786,224 780 C 225 774,227 769,230 765 C 232 762,235 756,237 752 C 240 744,246 733,253 722 C 255 719,259 712,262 706 C 266 701,269 695,271 693 C 272 692,275 687,277 682 C 280 677,284 671,286 668 C 289 665,293 659,296 655 C 299 651,306 642,311 636 C 316 630,323 621,327 617 C 330 613,337 605,341 600 C 346 595,352 588,354 585 C 357 579,359 577,369 572 C 373 570,375 567,379 562 C 382 557,385 554,389 551 C 393 548,398 545,400 542 C 411 532,429 518,438 512 C 444 508,450 504,453 502 C 455 500,460 496,464 494 C 469 491,472 488,475 484 C 479 479,480 478,492 475 C 494 475,499 472,503 469 C 508 466,518 461,525 457 C 533 453,542 448,545 446 C 548 444,555 442,559 440 C 564 438,570 435,573 433 C 579 429,589 425,614 416 C 623 413,634 409,638 407 C 643 404,650 402,653 400 C 666 396,668 393,670 377 C 672 363,672 327,669 322 C 665 312,661 311,636 317 M 1010 314 C 1002 317,1000 323,1001 334 C 1001 339,1001 353,1001 365 C 1002 394,1002 395,1030 406 C 1037 409,1046 413,1051 415 C 1056 417,1061 419,1064 420 C 1066 421,1074 424,1080 428 C 1087 431,1096 435,1100 437 C 1111 441,1115 443,1123 449 C 1126 451,1131 454,1134 455 C 1141 457,1156 465,1162 469 C 1165 471,1171 475,1174 477 C 1178 479,1184 483,1188 485 C 1192 488,1199 493,1204 497 C 1210 500,1217 506,1220 509 C 1223 511,1229 515,1232 517 C 1236 519,1241 523,1244 526 C 1247 529,1253 534,1256 536 C 1265 543,1278 555,1285 563 C 1288 567,1293 572,1296 574 C 1299 576,1303 580,1304 583 C 1306 585,1311 592,1316 597 C 1321 602,1329 611,1332 616 C 1336 620,1344 630,1350 636 C 1360 646,1362 648,1366 656 C 1368 662,1372 668,1376 672 C 1379 676,1383 682,1385 685 C 1388 692,1399 709,1408 722 C 1412 729,1420 744,1424 753 C 1425 756,1428 761,1430 763 C 1435 769,1436 771,1438 780 C 1439 785,1441 790,1444 796 C 1451 811,1460 835,1462 848 C 1463 853,1465 858,1467 862 C 1470 868,1471 871,1473 880 C 1473 886,1476 897,1477 904 C 1482 920,1484 931,1485 944 C 1486 956,1488 960,1496 968 C 1503 974,1510 978,1520 979 C 1523 980,1530 981,1534 982 C 1537 983,1542 984,1544 984 C 1547 985,1552 986,1555 988 C 1576 997,1585 989,1579 968 C 1578 962,1577 951,1576 944 C 1575 936,1574 925,1572 918 C 1567 894,1565 883,1564 876 C 1564 872,1562 866,1561 862 C 1559 859,1557 853,1557 849 C 1554 838,1544 808,1540 798 C 1537 793,1535 786,1534 780 C 1533 773,1531 768,1529 764 C 1525 757,1514 733,1509 722 C 1508 718,1503 709,1500 703 C 1497 697,1493 690,1492 687 C 1489 678,1487 675,1482 670 C 1479 667,1477 663,1475 659 C 1472 652,1471 649,1465 642 C 1463 639,1458 631,1454 625 C 1450 619,1445 611,1443 608 C 1441 606,1439 602,1438 600 C 1437 599,1434 595,1431 593 C 1429 590,1423 582,1418 575 C 1413 568,1406 558,1402 554 C 1398 550,1393 544,1391 542 C 1389 540,1382 532,1375 525 C 1368 518,1361 510,1358 507 C 1356 504,1351 500,1349 498 C 1346 496,1341 491,1339 488 C 1336 485,1332 481,1328 478 C 1324 476,1317 470,1312 464 C 1305 457,1299 452,1290 446 C 1284 442,1274 435,1269 430 C 1264 426,1258 421,1255 420 C 1252 418,1247 414,1244 411 C 1240 408,1235 405,1230 402 C 1225 400,1218 395,1214 392 C 1210 389,1203 385,1197 382 C 1191 379,1183 375,1180 372 C 1176 370,1168 367,1163 365 C 1157 363,1151 360,1147 357 C 1143 354,1138 352,1132 350 C 1127 348,1116 344,1109 341 C 1089 331,1049 319,1039 319 C 1038 319,1033 318,1028 316 C 1019 313,1014 312,1010 314 M 513 902 C 510 906,500 931,495 947 C 494 950,491 954,487 958 C 483 963,480 967,478 971 C 475 980,472 983,465 988 C 461 990,455 995,452 999 C 437 1012,413 1024,392 1027 C 388 1028,383 1029,381 1029 C 379 1030,356 1031,330 1032 C 303 1032,279 1033,276 1034 C 266 1034,217 1036,192 1037 C 179 1037,164 1038,158 1038 C 151 1039,137 1039,126 1039 C 114 1039,100 1040,94 1040 C 89 1041,77 1041,68 1042 C 59 1042,48 1043,44 1043 C 40 1044,32 1044,26 1044 C 15 1045,11 1046,11 1048 C 11 1051,14 1051,32 1052 C 42 1053,55 1053,60 1054 C 66 1054,84 1054,102 1055 C 119 1056,137 1057,142 1057 C 148 1058,158 1059,165 1059 C 171 1059,181 1060,185 1060 C 190 1061,204 1062,217 1063 C 255 1065,320 1067,349 1068 C 375 1069,376 1069,381 1071 C 384 1073,391 1075,396 1076 C 401 1077,408 1079,410 1080 C 418 1083,439 1095,452 1105 C 459 1110,466 1115,468 1117 C 469 1118,473 1123,476 1128 C 479 1133,484 1140,487 1144 C 493 1153,495 1156,498 1169 C 502 1187,511 1198,517 1193 C 520 1191,525 1180,527 1171 C 530 1158,532 1155,537 1149 C 540 1145,543 1140,545 1136 C 549 1126,553 1120,561 1114 C 564 1112,569 1107,572 1103 C 576 1097,579 1095,584 1092 C 587 1091,593 1087,596 1085 C 610 1076,624 1070,645 1064 C 664 1059,667 1057,661 1050 C 659 1047,651 1043,631 1037 C 614 1031,609 1029,600 1021 C 596 1018,589 1013,584 1011 C 577 1007,575 1006,572 1002 C 570 999,565 993,560 988 C 555 983,550 975,548 972 C 546 968,542 963,540 961 C 536 955,535 954,532 945 C 523 914,521 905,519 903 C 518 901,515 900,513 902 M 1143 914 C 1138 919,1134 931,1132 947 C 1131 953,1125 963,1116 973 C 1111 978,1106 984,1104 987 C 1095 1001,1095 1001,1081 1010 C 1078 1012,1072 1017,1067 1022 C 1056 1031,1049 1035,1037 1038 C 1024 1041,1017 1043,1003 1050 C 985 1059,986 1060,1008 1065 C 1014 1067,1023 1069,1027 1071 C 1031 1073,1037 1074,1039 1075 C 1045 1077,1049 1079,1054 1083 C 1056 1085,1061 1088,1065 1090 C 1077 1096,1106 1125,1112 1137 C 1114 1142,1117 1146,1121 1151 C 1125 1155,1127 1158,1128 1161 C 1141 1211,1141 1212,1152 1196 C 1158 1187,1162 1179,1164 1168 C 1166 1155,1167 1154,1172 1148 C 1175 1146,1179 1140,1182 1136 C 1190 1124,1214 1105,1230 1097 C 1233 1095,1239 1091,1242 1089 C 1249 1084,1250 1083,1273 1082 C 1284 1081,1298 1079,1304 1079 C 1328 1077,1342 1076,1390 1074 C 1416 1073,1445 1072,1453 1071 C 1467 1070,1507 1069,1575 1068 C 1603 1067,1624 1066,1630 1064 C 1645 1060,1644 1061,1633 1058 C 1628 1057,1618 1056,1599 1055 C 1584 1054,1569 1053,1564 1053 C 1559 1052,1546 1052,1534 1052 C 1510 1051,1494 1050,1454 1047 C 1439 1045,1418 1044,1407 1044 C 1396 1043,1377 1042,1366 1042 C 1355 1041,1335 1041,1323 1040 C 1298 1039,1295 1038,1279 1034 C 1273 1033,1264 1031,1259 1030 C 1243 1027,1228 1019,1209 1004 C 1191 990,1186 984,1179 972 C 1176 967,1172 962,1171 960 C 1166 954,1165 952,1164 942 C 1160 919,1151 907,1143 914 M 87 1116 C 82 1119,79 1141,82 1152 C 83 1154,85 1161,86 1166 C 91 1206,92 1210,100 1237 C 102 1246,104 1256,105 1260 C 107 1272,110 1281,118 1300 C 122 1311,126 1322,127 1327 C 128 1333,130 1338,132 1341 C 134 1343,136 1348,138 1351 C 146 1369,154 1386,155 1389 C 156 1391,160 1399,164 1406 C 168 1413,172 1421,173 1424 C 175 1430,176 1433,182 1438 C 186 1441,187 1443,188 1447 C 190 1453,191 1455,197 1462 C 199 1465,203 1470,205 1475 C 207 1479,212 1486,215 1489 C 220 1496,230 1511,236 1521 C 238 1525,242 1530,247 1534 C 252 1539,256 1543,258 1547 C 261 1553,267 1559,274 1564 C 278 1566,280 1569,283 1575 C 287 1582,289 1584,293 1587 C 303 1595,319 1611,326 1619 C 331 1626,333 1627,340 1631 C 347 1634,350 1636,355 1642 C 358 1646,364 1651,367 1652 C 370 1654,375 1658,378 1661 C 381 1665,386 1669,390 1671 C 394 1673,399 1676,403 1679 C 406 1682,412 1687,416 1690 C 421 1692,427 1697,430 1699 C 433 1702,439 1706,444 1708 C 448 1710,454 1714,456 1716 C 461 1719,479 1729,487 1733 C 489 1734,495 1737,500 1740 C 506 1742,515 1747,521 1749 C 526 1751,535 1755,540 1758 C 548 1762,565 1769,583 1775 C 589 1776,597 1779,602 1781 C 607 1783,616 1785,622 1787 C 628 1789,638 1791,642 1793 C 667 1801,674 1803,679 1803 C 682 1803,688 1804,691 1805 C 702 1808,707 1808,711 1804 C 716 1800,718 1793,718 1783 C 717 1779,717 1767,716 1756 C 715 1731,714 1727,707 1723 C 701 1719,693 1716,682 1714 C 677 1713,670 1711,666 1709 C 663 1708,657 1706,653 1705 C 649 1704,641 1701,635 1698 C 628 1696,619 1692,613 1690 C 607 1688,600 1686,597 1685 C 595 1684,589 1682,585 1681 C 581 1680,575 1677,571 1675 C 567 1673,562 1670,559 1669 C 552 1667,546 1663,540 1659 C 539 1658,532 1654,525 1651 C 518 1648,508 1642,504 1639 C 499 1636,494 1633,490 1632 C 481 1630,479 1629,475 1623 C 472 1620,468 1616,465 1614 C 462 1613,457 1609,454 1606 C 451 1604,444 1599,438 1595 C 428 1588,411 1575,401 1566 C 397 1562,392 1557,388 1555 C 385 1553,380 1548,378 1545 C 375 1542,370 1537,366 1534 C 360 1531,358 1528,355 1524 C 353 1520,347 1513,342 1508 C 336 1503,328 1494,324 1488 C 320 1482,312 1472,307 1466 C 291 1447,283 1436,278 1427 C 276 1422,272 1415,270 1412 C 267 1408,263 1401,261 1397 C 258 1392,252 1382,248 1376 C 243 1368,239 1361,237 1356 C 236 1352,233 1346,232 1344 C 230 1342,228 1339,227 1338 C 226 1337,225 1332,223 1327 C 222 1322,219 1314,216 1308 C 209 1293,202 1275,200 1264 C 198 1253,197 1250,193 1244 C 191 1242,190 1239,189 1235 C 188 1225,185 1209,182 1200 C 179 1190,177 1177,175 1164 C 174 1143,167 1136,141 1130 C 133 1128,124 1125,117 1123 C 110 1119,91 1114,90 1115 C 90 1115,89 1116,87 1116 M 1551 1130 C 1548 1130,1542 1132,1537 1134 C 1533 1136,1524 1138,1519 1139 C 1497 1145,1487 1151,1486 1160 C 1485 1161,1484 1168,1484 1174 C 1483 1181,1480 1193,1478 1201 C 1476 1210,1473 1222,1473 1228 C 1471 1236,1470 1241,1468 1247 C 1466 1251,1464 1256,1463 1258 C 1462 1266,1451 1296,1445 1308 C 1440 1317,1438 1324,1437 1328 C 1435 1337,1434 1340,1429 1345 C 1425 1348,1423 1351,1422 1355 C 1419 1366,1413 1377,1400 1396 C 1394 1406,1386 1419,1383 1423 C 1380 1429,1376 1435,1373 1438 C 1369 1442,1367 1446,1366 1449 C 1362 1460,1361 1461,1352 1469 C 1347 1474,1341 1480,1339 1484 C 1334 1491,1322 1504,1313 1513 C 1309 1517,1305 1522,1303 1524 C 1302 1527,1297 1531,1293 1534 C 1289 1537,1285 1542,1283 1545 C 1276 1556,1269 1562,1257 1568 C 1253 1571,1248 1574,1244 1579 C 1240 1584,1236 1587,1231 1589 C 1227 1591,1220 1597,1215 1601 C 1209 1605,1202 1610,1199 1613 C 1189 1618,1174 1628,1167 1634 C 1164 1636,1159 1640,1156 1641 C 1153 1642,1149 1645,1147 1646 C 1142 1650,1138 1652,1134 1653 C 1131 1654,1125 1657,1086 1676 C 1075 1681,1065 1685,1064 1686 C 1062 1686,1057 1688,1053 1690 C 1049 1692,1042 1695,1038 1695 C 1035 1696,1021 1700,1009 1704 C 996 1709,981 1713,973 1715 C 963 1717,958 1718,952 1721 C 948 1723,944 1725,944 1725 C 943 1725,941 1726,939 1728 C 935 1731,934 1736,934 1755 C 933 1763,932 1772,931 1776 C 928 1790,930 1803,937 1808 C 943 1812,984 1805,1015 1795 C 1024 1792,1034 1790,1038 1789 C 1042 1788,1049 1786,1053 1784 C 1057 1783,1064 1780,1067 1779 C 1071 1778,1079 1775,1085 1772 C 1092 1769,1100 1766,1104 1765 C 1108 1764,1116 1761,1122 1758 C 1128 1756,1135 1754,1137 1753 C 1140 1752,1144 1750,1147 1749 C 1149 1747,1155 1744,1159 1741 C 1163 1739,1169 1736,1171 1734 C 1174 1732,1181 1728,1186 1726 C 1191 1724,1197 1721,1199 1720 C 1201 1718,1205 1716,1208 1715 C 1210 1713,1216 1710,1220 1707 C 1223 1704,1229 1700,1233 1698 C 1237 1697,1242 1693,1246 1690 C 1250 1688,1257 1683,1262 1679 C 1266 1675,1274 1670,1278 1667 C 1283 1664,1289 1660,1292 1657 C 1294 1655,1300 1651,1304 1648 C 1309 1645,1317 1638,1328 1627 C 1337 1618,1347 1609,1350 1606 C 1353 1604,1359 1599,1362 1595 C 1365 1590,1371 1585,1374 1583 C 1381 1577,1384 1574,1390 1566 C 1393 1563,1398 1557,1402 1552 C 1405 1548,1412 1540,1416 1535 C 1419 1530,1425 1523,1428 1519 C 1431 1516,1435 1510,1437 1506 C 1439 1503,1443 1497,1446 1493 C 1449 1490,1454 1482,1456 1477 C 1459 1472,1464 1465,1466 1462 C 1469 1459,1472 1454,1474 1450 C 1476 1447,1479 1441,1482 1438 C 1486 1433,1489 1428,1490 1424 C 1492 1420,1496 1412,1499 1406 C 1502 1400,1506 1393,1507 1389 C 1513 1377,1521 1357,1522 1354 C 1523 1352,1525 1348,1527 1345 C 1530 1340,1534 1328,1534 1323 C 1534 1322,1536 1317,1538 1312 C 1544 1300,1552 1274,1555 1262 C 1557 1256,1559 1249,1561 1246 C 1562 1242,1564 1237,1564 1232 C 1565 1225,1567 1214,1572 1190 C 1574 1183,1575 1173,1576 1166 C 1576 1159,1577 1152,1578 1151 C 1584 1136,1571 1127,1551 1130"/>
+  </symbol>
+  <symbol id="i-girar" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 12a8 8 0 1 1-2.34-5.66M20 3.5V8h-4.5"/>
+  </symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2Z"/>
+  </symbol>
+  <symbol id="i-3d" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7ZM3.5 7 12 11.5 20.5 7M12 11.5v10"/>
+  </symbol>
+  <symbol id="i-estrella" viewBox="-10 -10 20 20">
+    <path d="M0-10Q1.2-1.2 10 0Q1.2 1.2 0 10Q-1.2 1.2-10 0Q-1.2-1.2 0-10Z"/>
+  </symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+  </symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g>
+    <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>
+  </symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m4 7 8 6 8-6"/></g>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></g>
+  </symbol>
+  <symbol id="i-reloj" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g>
+  </symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+  </symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+  </symbol>
+  <symbol id="i-cerrar" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/>
+  </symbol>
+  <symbol id="i-izq" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/>
+  </symbol>
+  <symbol id="i-der" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+  </symbol>
+</svg>
+
+<!-- Tinta gastada de máquina de escribir para los iconos (ver css, "Iconos") -->
+<svg class="filtros" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="f-maquina" x="-15%" y="-15%" width="130%" height="130%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="21" result="r"/>
+    <feDisplacementMap in="SourceGraphic" in2="r" scale="1.3" xChannelSelector="R" yChannelSelector="G" result="mov"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="1" seed="5" result="grano"/>
+    <feColorMatrix in="grano" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 8 -2.9" result="motas"/>
+    <feComposite in="mov" in2="motas" operator="in"/>
+  </filter>
+</svg>
+
+
+<header class="cabecera">
+  <div class="cabecera-in">
+    <a class="logo" href="#inicio" aria-label="ER·INK, back to top">
+      <svg class="logo-brujula" aria-hidden="true"><use href="#i-logo"/></svg>
+      <span class="marca" aria-hidden="true">ER<svg class="marca-estrella"><use href="#i-estrella"/></svg>INK</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Sections">
+      <ul>
+        <li><a href="#portafolio">Portfolio</a></li>
+        <li><a href="#sobre-mi">About</a></li>
+        <li><a href="#premios">Awards</a></li>
+        <li><a href="#tienda">Shop</a></li>
+        <li><a href="#fechas">Dates</a></li>
+        <li><a href="#reservar">How to book</a></li>
+        <li><a href="#cuidados">Aftercare</a></li>
+        <li><a href="#preguntas">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn-linea idioma" href="../index.html" lang="es" hreflang="es" data-idioma="es" aria-label="Versión en español"><span class="otro" aria-hidden="true">ES</span><span class="sep" aria-hidden="true">/</span><span class="actual" aria-hidden="true">EN</span></a>
+
+    <a class="btn" href="#solicitud">Book now</a>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+      <svg aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <!-- ============ 1. PORTADA ============ -->
+  <section class="portada" id="inicio">
+    <div class="portada-tarjeta">
+      <!-- La tarjeta de ER·INK. Al tocarla (o el botón "Flip") se da la vuelta y
+           enseña la parte de atrás, con el QR de Instagram y el teléfono.
+           Si cambias de Instagram, cambia también la imagen img/qr-instagram.svg -->
+      <div class="tarjeta-giro" id="tarjeta-giro" role="group" aria-label="ER·INK card">
+        <div class="giro-in">
+          <div class="cara cara-frente">
+            <span class="marco portada-marco" aria-hidden="true"></span>
+            <svg class="giro-logo" aria-hidden="true"><use href="#i-logo"/></svg>
+            <p class="marca giro-marca">ER<svg class="marca-estrella" aria-hidden="true"><use href="#i-estrella"/></svg>INK</p>
+            <p class="giro-sub">Tattoo Studio</p>
+          </div>
+          <div class="cara cara-dorso" inert aria-hidden="true">
+            <span class="marco giro-marco" aria-hidden="true"></span>
+            <a class="giro-qr" href="https://www.instagram.com/tats.erink/" data-ig target="_blank" rel="noopener">
+              <img src="../img/qr-instagram.svg" width="128" height="128" alt="QR code for the ER·INK Instagram">
+              <span class="giro-ig"><svg aria-hidden="true"><use href="#i-ig"/></svg><span data-texto="instagram">@tats.erink</span></span>
+            </a>
+            <a class="giro-tel" href="https://wa.me/5356363391" data-wa="saludo" target="_blank" rel="noopener">
+              <span class="giro-tel-icono" aria-hidden="true"><svg><use href="#i-tel"/></svg></span>
+              <span><span class="giro-tel-ceja">Phone</span><span class="giro-tel-num" data-texto="whatsapp">+53 5636 3391</span></span>
+            </a>
+            <span class="giro-raya" aria-hidden="true"></span>
+            <svg class="giro-logo giro-logo-sm" aria-hidden="true"><use href="#i-logo"/></svg>
+          </div>
+        </div>
+        <button class="voltear" type="button" aria-pressed="false" aria-label="Flip the card"><svg aria-hidden="true"><use href="#i-girar"/></svg><span>Flip</span></button>
+      </div>
+    </div>
+
+    <div class="portada-texto">
+      <h1 aria-labelledby="t-marca">
+        <span class="visualmente-oculto" id="t-marca">ER·INK Tattoo Studio</span>
+        <span class="marca"><span aria-hidden="true">ER</span><button class="estrella-btn" type="button" aria-expanded="false" aria-controls="tarjeta-contacto" aria-label="Contact"><svg class="marca-estrella" aria-hidden="true"><use href="#i-estrella"/></svg></button><span aria-hidden="true">INK</span></span>
+      </h1>
+      <!-- ✏️ MODIFICAR: ciudad, estilos y frase de la portada, en inglés. El enlace del mapa
+           (href) está también en la tarjeta de contacto y en el pie. -->
+      <p class="ceja"><a class="ubica" href="https://www.google.com/maps/search/?api=1&amp;query=22.422028%2C-83.7075" target="_blank" rel="noopener"><svg class="pin" aria-hidden="true"><use href="#i-pin"/></svg>Tattoo Studio · Pinar del Río, Cuba<span class="visualmente-oculto"> (open in maps)</span></a></p>
+      <p class="portada-estilos">Realism · Blackwork · Fine line · Neo-traditional</p>
+      <p class="portada-lema">Custom designs made for you, at my studio in Pinar del Río and in Panama.</p>
+      <div class="portada-botones">
+        <a class="btn" href="#solicitud">Book now</a>
+        <a class="btn-linea" href="#portafolio">See my work <svg aria-hidden="true"><use href="#i-flecha"/></svg></a>
+      </div>
+
+      <!-- Tarjeta de contacto: se abre al tocar la estrella de ER✦INK.
+           ✏️ MODIFICAR: el enlace del mapa (href) si cambia la dirección. -->
+      <div class="tarjeta-contacto marco relleno" id="tarjeta-contacto" role="dialog" aria-label="Contact" hidden>
+        <p class="ceja">Contact</p>
+        <ul>
+          <li><a href="https://wa.me/5356363391" data-wa="saludo" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-texto="whatsapp">+53 5636 3391</span></a></li>
+          <li><a href="https://www.instagram.com/tats.erink/" data-ig target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg><span data-texto="instagram">@tats.erink</span></a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&amp;query=22.422028%2C-83.7075" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Pinar del Río, Cuba<span class="visualmente-oculto"> (open in maps)</span></a></li>
+        </ul>
+        <a class="btn" href="https://wa.me/5356363391" data-wa="saludo" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Message me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. PORTAFOLIO ============ -->
+  <section class="seccion" id="portafolio" aria-labelledby="t-portafolio">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">01</p>
+        <h2 id="t-portafolio">Portfolio</h2>
+        <p class="seccion-intro">Real work, fresh and healed. Tap a photo to see it full size.</p>
+      </header>
+
+      <noscript><p class="noscript">Turn on JavaScript to see the gallery. You can also see my work on <a href="https://www.instagram.com/tats.erink/">Instagram</a>.</p></noscript>
+
+      <div class="filtros" id="filtros" role="group" aria-label="Filter by style"></div>
+      <ul class="galeria" id="galeria"></ul>
+
+      <div class="galeria-pie">
+        <button class="btn-linea" type="button" id="ver-mas" hidden>See more work</button>
+        <a href="https://www.instagram.com/tats.erink/" data-ig target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-ig"/></svg> More work on <span data-texto="instagram">@tats.erink</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. SOBRE MÍ ============ -->
+  <section class="seccion" id="sobre-mi" aria-labelledby="t-sobre">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">02</p>
+        <h2 id="t-sobre">About me</h2>
+      </header>
+
+      <div class="sobre">
+        <div class="sobre-foto">
+          <!-- ✏️ MODIFICAR: texto alt de la foto del artista, en inglés -->
+          <img src="../img/artista/artista-480.webp"
+               srcset="../img/artista/artista-480.webp 480w, ../img/artista/artista-960.webp 960w"
+               sizes="(min-width: 960px) 460px, 100vw"
+               width="960" height="1200" loading="lazy" decoding="async"
+               alt="Portrait of Erik Ramos, the tattoo artist behind ER·INK">
+          <div class="marco" aria-hidden="true"></div>
+        </div>
+
+        <div class="sobre-texto">
+          <!-- ✏️ MODIFICAR: nombre, historia y experiencia, en inglés -->
+          <p class="destacado">I'm Erik Ramos, I'm <span data-edad="2004-03-25">22</span> and I'm the tattoo artist behind ER·INK.</p>
+          <p>I was drawing long before I was tattooing: notebooks full of skulls, portraits of my family and lettering copied from my dad's record sleeves. In 2021 I did my first tattoo in a room in Pinar del Río with a borrowed machine, and I haven't stopped since.</p>
+          <p>Today I work out of my studio in Pinar del Río and travel to Panama several times a year as a guest artist. My work moves mostly between black and grey realism, blackwork and neo-traditional.</p>
+
+          <!-- ✏️ MODIFICAR: cifras -->
+          <div class="cifras">
+            <div><strong data-desde="2021">5</strong><span>years tattooing</span></div>
+            <div><strong data-premios>5</strong><span>awards</span></div>
+            <div><strong>2</strong><span>countries</span></div>
+          </div>
+
+          <h3>How I work</h3>
+          <ul class="lista-estrella">
+            <li>Every design is drawn for you. I don't repeat flash from a catalogue.</li>
+            <li>Single-use, disposable needles and cartridges, opened in front of you.</li>
+            <li>One client at a time: your appointment is yours alone.</li>
+            <li>If an idea won't age well on skin, I'll tell you and we'll find another way.</li>
+          </ul>
+
+          <div class="bloque">
+            <h3>I've tattooed in</h3>
+            <!-- ✏️ MODIFICAR: ciudades y países donde has trabajado, en inglés -->
+            <ul class="lugares">
+              <li>Pinar del Río, Cuba</li>
+              <li>Panama</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. PREMIOS ============ -->
+  <!-- The awards are in datos/premios.js -->
+  <section class="seccion" id="premios" aria-labelledby="t-premios">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">03</p>
+        <h2 id="t-premios">Awards</h2>
+        <p class="seccion-intro">Tattoo competitions where I've placed in the top three.</p>
+      </header>
+      <div class="vitrina" id="vitrina" hidden></div>
+      <div class="premios" id="lista-premios"></div>
+    </div>
+  </section>
+
+  <!-- ============ 5. TIENDA ============ -->
+  <!-- Los productos, sus precios, fotos y tallas están en datos/tienda.js -->
+  <section class="seccion" id="tienda" aria-labelledby="t-tienda">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">04</p>
+        <h2 id="t-tienda">Shop</h2>
+        <p class="seccion-intro">ER·INK merch. Pick sizes and quantities and your order reaches me on WhatsApp, where we arrange payment and delivery.</p>
+      </header>
+      <div class="tienda" id="lista-tienda"></div>
+    </div>
+  </section>
+
+  <!-- ============ 6. PRÓXIMAS FECHAS ============ -->
+  <section class="seccion" id="fechas" aria-labelledby="t-fechas">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num"><svg class="brujula" aria-hidden="true"><use href="#i-logo"/></svg>05</p>
+        <h2 id="t-fechas">Upcoming dates</h2>
+        <p class="seccion-intro">Besides the studio in Pinar del Río, I travel to Panama as a guest artist. There are only a few slots in each city, so it's best to book early.</p>
+      </header>
+      <ul class="viajes" id="viajes"></ul>
+    </div>
+  </section>
+
+  <!-- ============ 7. CÓMO RESERVAR ============ -->
+  <section class="seccion" id="reservar" aria-labelledby="t-reservar">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">06</p>
+        <h2 id="t-reservar">How to book</h2>
+      </header>
+
+      <ol class="pasos">
+        <li class="paso">
+          <h3>Contact</h3>
+          <p>Message me on WhatsApp, by email or with the form below.</p>
+        </li>
+        <li class="paso">
+          <h3>Idea</h3>
+          <p>Tell me what you want, where on your body and how big. If you have reference photos, send them over.</p>
+        </li>
+        <li class="paso">
+          <h3>Quote</h3>
+          <p>I'll give you a price and tell you how many sessions it needs. Asking is free and doesn't commit you to anything.</p>
+        </li>
+        <li class="paso">
+          <h3>Appointment</h3>
+          <p>On the day, we go over the final design together and adjust it before we start.</p>
+        </li>
+      </ol>
+
+      <div class="politicas">
+        <!-- ✏️ MODIFICAR: política de cambios y cancelación, en inglés -->
+        <div class="politica">
+          <h3>Changes and cancellations</h3>
+          <ul class="lista-estrella">
+            <li>You can move your date once with at least 72 hours' notice.</li>
+            <li>If you can't make it, let me know as soon as possible so I can give the slot to someone else.</li>
+            <li>If I have to cancel, I'll let you know in good time and we'll find another date.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. FORMULARIO DE SOLICITUD ============ -->
+  <section class="seccion" id="solicitud" aria-labelledby="t-solicitud">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">07</p>
+        <h2 id="t-solicitud">Request an appointment</h2>
+        <p class="seccion-intro">Fill in what you know. When you send it, WhatsApp (or your email app) opens with the message already written, and you decide whether to send it. Nothing is stored anywhere.</p>
+      </header>
+
+      <form class="solicitud marco relleno" id="form-cita">
+        <div class="campos">
+          <div class="campo">
+            <label for="f-nombre">Name</label>
+            <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="f-tel">Your WhatsApp</label>
+            <div class="tel-prefijo">
+              <select id="f-prefijo" name="prefijo" aria-label="Country code">
+                <option value="CU" data-prefijo="53">+53 Cuba</option>
+              </select>
+              <input id="f-tel" name="tel" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="5123 4567" required>
+            </div>
+          </div>
+          <div class="campo campo-ancho">
+            <label for="f-ciudad">Where do you want to get tattooed?</label>
+            <select id="f-ciudad" name="ciudad" required></select>
+            <p class="ayuda">At the studio in Cuba or at one of my upcoming guest spots.</p>
+          </div>
+          <!-- Date: if the app published the free days (datos/disponibilidad.js), this
+               field opens a calendar with booked days in black. Otherwise the free-text
+               "Preferred dates" field stays. -->
+          <div class="campo campo-ancho campo-fecha" id="campo-fecha" hidden>
+            <label id="l-fecha" for="f-fecha">Preferred date</label>
+            <button class="selector-fecha vacio" type="button" id="f-fecha" aria-labelledby="l-fecha f-fecha" aria-expanded="false" aria-controls="calendario">Choose a day</button>
+            <input type="hidden" id="f-dia" name="dia">
+            <p class="ayuda error-campo" id="error-fecha" role="alert" hidden>Choose a day on the calendar (or "Another date").</p>
+            <div class="desplegable" id="calendario">
+              <div>
+                <div class="calendario">
+                  <div class="cal-cab">
+                    <button class="cal-flecha" type="button" id="cal-antes" aria-label="Previous month"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+                    <p class="cal-mes" id="cal-mes" aria-live="polite"></p>
+                    <button class="cal-flecha" type="button" id="cal-despues" aria-label="Next month"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+                  </div>
+                  <p class="cal-ejemplo" id="cal-ejemplo" hidden>Sample days: the real ones show up here as soon as the diary publishes them.</p>
+                  <div class="cal-rejilla" id="cal-rejilla"></div>
+                  <p class="cal-leyenda">
+                    <span class="leyenda libre">Free</span>
+                    <span class="leyenda parcial">Some hours</span>
+                    <span class="leyenda ocupado">Booked</span>
+                  </p>
+                  <p class="cal-vacio" id="cal-vacio" hidden></p>
+                  <button class="cal-otra" type="button" id="cal-otra" aria-pressed="false">Another date / not sure yet</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="campo" id="campo-hora" hidden>
+            <label for="f-hora">Time <span class="opcional">(optional)</span></label>
+            <select id="f-hora" name="hora"></select>
+          </div>
+          <div class="campo" id="campo-fechas">
+            <label for="f-fechas">Preferred dates <span class="opcional">(optional)</span></label>
+            <input id="f-fechas" name="fechas" type="text" placeholder="E.g. second week of December">
+          </div>
+          <div class="campo">
+            <label for="f-estilo">Style <span class="opcional">(optional)</span></label>
+            <select id="f-estilo" name="estilo"></select>
+          </div>
+          <div class="campo">
+            <label for="f-zona">Body placement <span class="opcional">(optional)</span></label>
+            <select id="f-zona" name="zona"></select>
+          </div>
+          <div class="campo">
+            <label for="f-tamano">Approximate size <span class="opcional">(optional)</span></label>
+            <select id="f-tamano" name="tamano">
+              <option value="">Choose an option</option>
+              <option>Small (up to 5 cm / 2 in)</option>
+              <option>Medium (5–10 cm / 2–4 in)</option>
+              <option>Large (10–20 cm / 4–8 in)</option>
+              <option>Extra large (over 20 cm / 8 in)</option>
+              <option>Multi-session piece (sleeve, back…)</option>
+              <option>Not sure</option>
+            </select>
+          </div>
+          <div class="campo campo-ancho">
+            <label for="f-idea">Your idea</label>
+            <textarea id="f-idea" name="idea" required placeholder="What you'd like, whether it has a meaning, colour or black and grey…"></textarea>
+          </div>
+        </div>
+
+        <div class="acciones">
+          <button class="btn" type="submit" name="via" value="whatsapp">
+            <svg aria-hidden="true"><use href="#i-wa"/></svg> Send on WhatsApp
+          </button>
+          <button class="btn-linea" type="submit" name="via" value="email">
+            <svg aria-hidden="true"><use href="#i-mail"/></svg> Send by email
+          </button>
+        </div>
+        <p class="form-nota">You can send reference photos afterwards in the same chat or email.</p>
+
+        <p class="visualmente-oculto" id="aviso-vivo" role="status"></p>
+        <div class="aviso" id="aviso" hidden>
+          <p id="aviso-msg"></p>
+          <label class="visualmente-oculto" for="aviso-texto">Your message</label>
+          <textarea id="aviso-texto" readonly rows="6"></textarea>
+          <button class="btn-linea" type="button" id="aviso-copiar">Copy message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ 9. CUIDADOS ============ -->
+  <section class="seccion" id="cuidados" aria-labelledby="t-cuidados">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">08</p>
+        <h2 id="t-cuidados">Aftercare</h2>
+        <p class="seccion-intro">A well-healed tattoo looks good for years. Here's what to do in the first few weeks.</p>
+      </header>
+
+      <!-- ✏️ MODIFICAR: los mismos cuidados que en index.html, en inglés -->
+      <div class="cuidados">
+        <div class="cuidado">
+          <h3>First hours</h3>
+          <ul class="lista-estrella">
+            <li>Keep the film on for as long as I tell you (usually between 3 and 24 hours).</li>
+            <li>Wash your hands, take it off and wash the tattoo with lukewarm water and mild soap.</li>
+            <li>Pat it dry with clean paper towel. Don't rub.</li>
+          </ul>
+        </div>
+        <div class="cuidado">
+          <h3>First 2 weeks</h3>
+          <ul class="lista-estrella">
+            <li>Wash it twice a day and apply a thin layer of healing cream.</li>
+            <li>Itching and peeling are normal. Don't scratch or pick at it.</li>
+            <li>Wear clean, loose clothes that don't rub the area.</li>
+          </ul>
+        </div>
+        <div class="cuidado">
+          <h3>Avoid for 3 weeks</h3>
+          <ul class="lista-estrella">
+            <li>The beach, pools, rivers and saunas.</li>
+            <li>Direct sun on the tattoo.</li>
+            <li>Shaving or waxing the area.</li>
+          </ul>
+        </div>
+        <div class="cuidado">
+          <h3>For life</h3>
+          <ul class="lista-estrella">
+            <li>High sunscreen (SPF 50) whenever you're out in the sun.</li>
+            <li>Caribbean sun fades lines and colour faster than anything else.</li>
+            <li>Moisturised skin keeps a tattoo looking its best.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="nota-medica"><strong>If the redness gets worse,</strong> the area feels hot, there's pus or you have a fever, see a doctor and message me.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10. PREGUNTAS FRECUENTES ============ -->
+  <section class="seccion" id="preguntas" aria-labelledby="t-preguntas">
+    <div class="contenedor">
+      <header class="seccion-cab">
+        <p class="seccion-num">09</p>
+        <h2 id="t-preguntas">FAQ</h2>
+      </header>
+
+      <!-- ✏️ MODIFICAR: las mismas respuestas que en index.html, en inglés -->
+      <div class="faq">
+        <details>
+          <summary>How much does a tattoo cost?</summary>
+          <p>It depends on the size, the detail and the placement. The minimum is 40 USD. Send me your idea and I'll give you an exact quote, no strings attached.</p>
+        </details>
+        <details>
+          <summary>I'm on holiday in Cuba. Can I get tattooed?</summary>
+          <p>Yes, it's very common. Ideally do it at the end of your trip: for three weeks you won't be able to swim in the sea or sunbathe that area. Message me before you arrive and I'll save you a date.</p>
+        </details>
+        <details>
+          <summary>Do you design it or can I bring my own?</summary>
+          <p>Both. You can bring your drawing and I'll adapt it so it works on skin, or we start from your idea and I design it from scratch.</p>
+        </details>
+        <details>
+          <summary>Does it hurt?</summary>
+          <p>A bit, and it depends on the placement and on you. Ribs, feet and elbows tend to hurt more; arms and thighs, less. We take breaks whenever you need.</p>
+        </details>
+        <details>
+          <summary>How old do I need to be?</summary>
+          <p>18 or older, with photo ID.</p>
+        </details>
+        <details>
+          <summary>Is it safe?</summary>
+          <p>I use single-use disposable needles and cartridges, new gloves and barriers at every appointment, and everything is disinfected between clients.</p>
+        </details>
+        <details>
+          <summary>Do you cover up old tattoos?</summary>
+          <p>Yes, I do cover-ups and reworks. Send me a well-lit photo of the tattoo you have and I'll tell you what's possible.</p>
+        </details>
+        <details>
+          <summary>Are touch-ups included?</summary>
+          <p>Yes. If it needs one, the first touch-up is free within 3 months.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 11. PIE DE PÁGINA ============ -->
+<footer class="pie" id="contacto">
+  <div class="contenedor">
+    <div class="pie-marca">
+      <span class="marca" aria-hidden="true">ER<svg class="marca-estrella"><use href="#i-estrella"/></svg>INK</span>
+      <p class="ceja">Tattoo Studio</p>
+    </div>
+
+    <div class="pie-grid">
+      <div>
+        <h2>Contact</h2>
+        <!-- ✏️ MODIFICAR: WhatsApp, Instagram y email (también en datos/config.js) -->
+        <ul>
+          <li><a href="https://wa.me/5356363391" data-wa target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-texto="whatsapp">+53 5636 3391</span></a></li>
+          <li><a href="https://www.instagram.com/tats.erink/" data-ig target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"/></svg><span data-texto="instagram">@tats.erink</span></a></li>
+          <li><a href="mailto:eri539880@gmail.com" data-email><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-texto="email">eri539880@gmail.com</span></a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Studio</h2>
+        <!-- ✏️ MODIFICAR: dirección, horario y enlace al mapa, en inglés -->
+        <address>
+          <svg aria-hidden="true"><use href="#i-pin"/></svg>
+          <span>Pinar del Río, Cuba</span>
+        </address>
+        <p class="pie-linea"><svg aria-hidden="true"><use href="#i-reloj"/></svg>Mon, Tue, Thu, Fri &amp; Sat: 1:30–6:00 PM. Wed &amp; Sun: 10:00 AM–12:00 PM and 1:30–6:00 PM. By appointment only.</p>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&amp;query=22.422028%2C-83.7075" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-flecha"/></svg>See on the map</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Bookings</h2>
+        <p>I reply within one or two days. For guest spot dates, get in touch at least a month ahead.</p>
+        <a class="btn" href="#solicitud">Book now</a>
+      </div>
+    </div>
+
+    <div class="legal">
+      <p>© <span data-anio>2026</span> ER·INK Tattoo Studio</p>
+      <p><a href="../index.html" lang="es" hreflang="es" data-idioma="es">Versión en español</a></p>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/5356363391" data-wa="saludo" target="_blank" rel="noopener" aria-label="Message on WhatsApp">
+  <svg aria-hidden="true"><use href="#i-wa"/></svg>
+</a>
+
+<dialog class="visor" id="visor" aria-label="Enlarged photo">
+  <div class="visor-barra">
+    <span class="visor-contador" id="visor-contador"></span>
+    <button class="visor-btn visor-cerrar" type="button" aria-label="Close">
+      <svg aria-hidden="true"><use href="#i-cerrar"/></svg>
+    </button>
+  </div>
+  <div class="visor-escenario">
+    <img id="visor-img" alt="">
+    <button class="visor-btn visor-nav visor-ant" type="button" aria-label="Previous photo">
+      <svg aria-hidden="true"><use href="#i-izq"/></svg>
+    </button>
+    <button class="visor-btn visor-nav visor-sig" type="button" aria-label="Next photo">
+      <svg aria-hidden="true"><use href="#i-der"/></svg>
+    </button>
+  </div>
+  <div class="visor-pie">
+    <p class="visor-titulo" id="visor-titulo"></p>
+    <p class="visor-detalle" id="visor-detalle"></p>
+  </div>
+</dialog>
+
+<script src="../datos/config.js" defer></script>
+<script src="../datos/galeria.js" defer></script>
+<script src="../datos/premios.js" defer></script>
+<script src="../datos/tienda.js" defer></script>
+<script src="../datos/viajes.js" defer></script>
+<script src="../datos/disponibilidad.js" defer></script>
+<script src="../js/textos.js" defer></script>
+<script src="../js/app.js" defer></script>
+</body>
+</html>

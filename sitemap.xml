@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ✏️ MODIFICAR: cambia erink.example.com por el dominio real de la web.
+     Pon en <lastmod> la fecha del último cambio grande (AÑO-MES-DÍA). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://erink.example.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://erink.example.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://erink.example.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://erink.example.com/"/>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://erink.example.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://erink.example.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://erink.example.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://erink.example.com/"/>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+</urlset>
