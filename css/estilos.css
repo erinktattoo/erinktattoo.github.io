@@ -301,24 +301,29 @@ use[href="#i-pin"], use[href="#i-reloj"], use[href="#i-flecha"] { filter: url(#f
 
 html.js .nav.abierta {
   display: block;
-  position: absolute;
-  top: 100%;
-  left: 0; right: 0;
-  max-height: calc(100vh - var(--cabecera));
+  position: fixed;
+  top: var(--cabecera);
+  right: 0;
+  bottom: 0;
+  width: min(78vw, 300px);
   overflow-y: auto;
-  padding: 8px var(--margen) 20px;
+  padding: 8px 24px 24px;
   background: var(--negro);
-  border-bottom: 1px solid var(--linea);
+  border-left: 1px solid var(--linea);
+  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .55); /* oscurece el resto de la página */
+  animation: menu-entra .28s cubic-bezier(.2, .7, .2, 1);
 }
+@keyframes menu-entra { from { transform: translateX(100%); } }
 .nav.abierta a {
   display: block;
-  padding: 10px 0;
-  font-family: var(--f-titulos);
-  font-size: 1.75rem;
-  line-height: 1.2;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--linea);
+  color: var(--gris);
+  font: 700 .8rem/1.2 var(--f-texto);
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
-.nav.abierta a:hover { color: var(--rojo-texto); }
+.nav.abierta a:hover, .nav.abierta a:focus-visible { color: var(--texto); }
 
 /* Idioma: un botón con los dos idiomas; el actual en rojo, el otro en gris */
 .idioma { --px: 6px; min-height: 44px; gap: 6px; font-size: .74rem; letter-spacing: .12em; padding-left: calc(var(--px) + .12em); }
@@ -1284,7 +1289,8 @@ html:not(.js) .menu-btn { display: none; }
 }
 .campo textarea { min-height: 140px; resize: vertical; }
 .tel-prefijo { display: flex; gap: 8px; }
-.tel-prefijo select { flex: 0 1 48%; min-width: 0; padding-right: 36px; background-position: right 10px center; }
+/* El prefijo, estrecho: cerrado solo enseña "+53" (ver llenarPrefijos en js/app.js) */
+.campo .tel-prefijo select { flex: 0 0 auto; width: 4.9em; min-width: 0; padding-left: 10px; padding-right: 24px; background-position: right 6px center; }
 .tel-prefijo input { flex: 1 1 0; min-width: 0; }
 .campo select {
   -webkit-appearance: none;
@@ -1647,10 +1653,10 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
   60% { transform: scale(1.05) translateX(1px) rotate(.3deg); }
   100% { transform: scale(1.05); }
 }
-@keyframes tinta {
-  from { clip-path: inset(0 100% 0 0); filter: blur(5px); }
-  60% { filter: blur(1px); }
-  to { clip-path: inset(0 0 0 0); filter: blur(0); }
+@keyframes letra {
+  from { opacity: 0; filter: blur(8px); transform: translateY(.15em); }
+  60% { opacity: 1; filter: blur(1px); }
+  to { opacity: 1; filter: none; transform: none; }
 }
 @keyframes latido {
   0%, 55% { opacity: 0; transform: scale(.6); }
@@ -1707,12 +1713,17 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
   .btn:hover, .btn-linea:hover, .filtro:hover { animation: zumbido .45s linear both; }
 }
 
-/* 4 · Tinta en los títulos (y la brújula de "Próximas fechas") */
+/* 4 · Los títulos aparecen letra a letra (js/app.js pone cada letra en su
+   <span>); cada una llega con un difuminado corto y el título queda nítido.
+   Después se traza la línea de debajo. */
+.titulo-palabra { display: inline-block; white-space: nowrap; }
+.titulo-letra { display: inline-block; }
 .animable .seccion-cab:not(.visto) .seccion-num { opacity: 0; }
-.animable .seccion-cab:not(.visto) h2 { clip-path: inset(0 100% 0 0); }
+.animable .seccion-cab:not(.visto) .titulo-letra { opacity: 0; }
+.animable .seccion-cab:not(.visto) h2::after { clip-path: inset(0 100% 0 0); }
 .animable .seccion-cab.visto .seccion-num { animation: subir .5s both; }
-.animable .seccion-cab.visto h2 { animation: tinta 1.1s .1s cubic-bezier(.7, 0, .2, 1) both; }
-.animable .seccion-cab.visto h2::after { animation: trazo .9s .5s cubic-bezier(.7, 0, .2, 1) both; }
+.animable .seccion-cab.visto .titulo-letra { animation: letra .55s calc(var(--l, 0) * 55ms + .1s) cubic-bezier(.2, .7, .2, 1) both; }
+.animable .seccion-cab.visto h2::after { animation: trazo .9s calc(var(--n, 8) * 55ms + .25s) cubic-bezier(.7, 0, .2, 1) both; }
 .animable .seccion-cab.visto .brujula { animation: norte 1.6s .1s cubic-bezier(.3, .7, .3, 1) both; }
 
 /* 5 · Las fotos aparecen una tras otra (también las de "Ver más" y al filtrar) */

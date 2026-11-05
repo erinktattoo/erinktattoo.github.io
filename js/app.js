@@ -119,6 +119,10 @@
     nav.addEventListener("click", function (e) {
       if (e.target.closest("a")) cerrarMenu();
     });
+    // Tocar fuera del panel (en la parte oscurecida) también lo cierra.
+    document.addEventListener("click", function (e) {
+      if (nav.classList.contains("abierta") && !nav.contains(e.target) && !menuBtn.contains(e.target)) cerrarMenu();
+    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && nav.classList.contains("abierta")) {
         cerrarMenu();
@@ -179,7 +183,7 @@
   }
 
   // i: posición en la galería; orden: posición dentro de la tanda (para aparecer una tras otra)
-  function tarjeta(t, i, orden) {
+  function tarjetaFoto(t, i, orden) {
     var img = el("img", {
       loading: "lazy",
       decoding: "async",
@@ -204,7 +208,7 @@
     var desde = mostrados;
     var hasta = Math.min(mostrados + POR_TANDA, visibles.length);
     var frag = document.createDocumentFragment();
-    for (var i = desde; i < hasta; i++) frag.appendChild(tarjeta(visibles[i], i, i - desde));
+    for (var i = desde; i < hasta; i++) frag.appendChild(tarjetaFoto(visibles[i], i, i - desde));
     listaGaleria.appendChild(frag);
     mostrados = hasta;
     var quedan = visibles.length - mostrados;
@@ -839,6 +843,27 @@
   // Los títulos de sección y la galería aparecen cuando llegan a la pantalla
   // (la animación está en css/estilos.css, sección "Animaciones").
   if (document.documentElement.classList.contains("animable")) {
+    // Títulos letra a letra: cada letra va en su <span> (el texto entero queda
+    // en aria-label para los lectores de pantalla).
+    $$(".seccion-cab h2").forEach(function (h) {
+      var texto = h.textContent.trim();
+      var cont = el("span", { "aria-hidden": "true" });
+      var n = 0;
+      texto.split(/(\s+)/).forEach(function (trozo) {
+        if (!trozo) return;
+        if (/^\s+$/.test(trozo)) { cont.appendChild(document.createTextNode(" ")); return; }
+        var palabra = el("span", { class: "titulo-palabra" });
+        Array.from(trozo).forEach(function (letra) {
+          palabra.appendChild(el("span", { class: "titulo-letra", style: "--l:" + n++ }, letra));
+        });
+        cont.appendChild(palabra);
+      });
+      h.setAttribute("aria-label", texto);
+      h.textContent = "";
+      h.appendChild(cont);
+      h.style.setProperty("--n", n);
+    });
+
     var observador = new IntersectionObserver(function (entradas) {
       entradas.forEach(function (e) {
         if (e.isIntersecting) {
@@ -1047,41 +1072,38 @@
     return partes.join("|");
   }
 
-  // Prefijos de WhatsApp: [país, prefijo]. Cuba y Panamá primero; el resto por nombre.
-  var PREFIJOS = [
-    ["CU", "53"], ["PA", "507"], ["US", "1"], ["CA", "1"], ["MX", "52"], ["ES", "34"],
-    ["IT", "39"], ["DE", "49"], ["FR", "33"], ["GB", "44"], ["PT", "351"], ["NL", "31"],
-    ["CH", "41"], ["BE", "32"], ["AR", "54"], ["CO", "57"], ["CL", "56"], ["VE", "58"],
-    ["PE", "51"], ["EC", "593"], ["UY", "598"], ["CR", "506"], ["DO", "1"], ["BR", "55"]
-  ];
+  // Prefijos de WhatsApp: [país, prefijo]. Solo Cuba y Panamá; cualquier otro
+  // país, con "Otro" (el cliente escribe su número con el + delante).
+  var PREFIJOS = [["CU", "53"], ["PA", "507"]];
 
   function llenarPrefijos() {
     var sel = $("#f-prefijo");
     if (!sel) return;
-    var fijos = PREFIJOS.slice(0, 2);
-    var resto = PREFIJOS.slice(2).sort(function (a, b) { return nombrePais(a[0]).localeCompare(nombrePais(b[0]), idioma); });
     sel.textContent = "";
-    fijos.concat(resto).forEach(function (p) {
-      // El prefijo va delante para que se vea aunque el nombre no quepa.
-      var o = opcion(p[0], "+" + p[1] + " " + nombrePais(p[0]));
+    PREFIJOS.forEach(function (p) {
+      var o = opcion(p[0], "+" + p[1]);
       o.setAttribute("data-prefijo", p[1]);
+      o.setAttribute("data-largo", "+" + p[1] + " " + nombrePais(p[0]));
       sel.appendChild(o);
     });
     sel.appendChild(opcion("otro", T.prefijoOtro));
+    sel.value = "CU"; // siempre empieza en Cuba
 
-    // País del navegador si está en la lista (en la página en español no se usa
-    // "US": muchos móviles de Latinoamérica vienen en "es-US").
-    var elegido = "CU";
-    (navigator.languages || [navigator.language || ""]).some(function (l) {
-      var region = (String(l).split("-")[1] || "").toUpperCase();
-      var hay = PREFIJOS.some(function (p) { return p[0] === region; });
-      if (hay && !(idioma === "es" && region === "US")) { elegido = region; return true; }
-      return false;
-    });
-    sel.value = elegido;
+    // El campo es estrecho: cerrado enseña solo el prefijo ("+53") y, al
+    // abrirlo, la lista lleva también el país ("+53 Cuba").
+    function nombresLargos(largos) {
+      Array.prototype.forEach.call(sel.options, function (o) {
+        var largo = o.getAttribute("data-largo");
+        if (largo) o.textContent = largos ? largo : "+" + o.getAttribute("data-prefijo");
+      });
+    }
+    sel.addEventListener("mousedown", function () { nombresLargos(true); });
+    sel.addEventListener("touchstart", function () { nombresLargos(true); }, { passive: true });
+    sel.addEventListener("change", function () { nombresLargos(false); });
+    sel.addEventListener("blur", function () { nombresLargos(false); });
 
     var tel = $("#f-tel");
-    function marcador() { tel.placeholder = sel.value === "otro" ? "+00 1234 5678" : (sel.value === "CU" ? "5123 4567" : ""); }
+    function marcador() { tel.placeholder = sel.value === "otro" ? "+34 612 345 678" : (sel.value === "CU" ? "5123 4567" : "6123 4567"); }
     sel.addEventListener("change", marcador);
     marcador();
   }

@@ -45,7 +45,7 @@ var TEXTOS = {
     },
     elige: "Elige una opción",
     noSe: "No lo sé, aconséjame",
-    prefijoOtro: "Otro país (escribe el número con +)",
+    prefijoOtro: "Otro",
     otraZona: "Otra zona",
     // Días libres (datos/disponibilidad.js)
     estadoLibre: "libre todo el día",
@@ -118,7 +118,7 @@ var TEXTOS = {
     },
     elige: "Choose an option",
     noSe: "Not sure, I'd like advice",
-    prefijoOtro: "Other country (type the number with +)",
+    prefijoOtro: "Other",
     otraZona: "Other",
     estadoLibre: "free all day",
     estadoParcial: "free {horas}",
