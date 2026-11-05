@@ -349,7 +349,7 @@ html:not(.js) .menu-btn { display: none; }
   .cabecera .btn { display: inline-flex; }
 }
 
-/* Con Premios y Tienda el menú en español mide unos 1180 px en total:
+/* Con Premios y Merch el menú en español mide unos 1170 px en total:
    por debajo de 1220 px se usa el botón de menú. */
 @media (min-width: 1220px) {
   .menu-btn { display: none; }
@@ -977,7 +977,7 @@ html:not(.js) .menu-btn { display: none; }
   .premios { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 64px; align-items: start; }
 }
 
-/* ---------- 4b. Modelos 3D (vitrina de trofeos y tienda) ---------- */
+/* ---------- 4b. Modelos 3D (vitrina de trofeos y merch) ---------- */
 
 /* Caja con la imagen del modelo; al pulsar "Girar en 3D" se cambia por el
    visor (model-viewer), que se gira con el dedo o el ratón. */
@@ -1057,7 +1057,7 @@ html:not(.js) .menu-btn { display: none; }
   }
 }
 
-/* ---------- 4c. Tienda ---------- */
+/* ---------- 4c. Merch (datos/tienda.js) ---------- */
 
 .tienda { display: grid; gap: 64px; }
 .producto { display: grid; gap: 28px; }

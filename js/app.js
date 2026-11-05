@@ -507,7 +507,7 @@
     }
   }
 
-  /* ---------- Tienda (datos/tienda.js) ---------- */
+  /* ---------- Merch (datos/tienda.js) ---------- */
 
   var cajaTienda = $("#lista-tienda");
   var productos = Array.isArray(window.TIENDA)
@@ -520,8 +520,8 @@
 
   if (cajaTienda && !productos) avisoError(cajaTienda, "datos/tienda.js");
   if (cajaTienda && productos && !productos.length) {
-    $("#tienda").hidden = true;
-    $$('a[href="#tienda"]').forEach(function (a) { a.parentNode.hidden = true; });
+    $("#merch").hidden = true;
+    $$('a[href="#merch"]').forEach(function (a) { a.parentNode.hidden = true; });
   }
 
   function pintarProducto(p) {
@@ -822,7 +822,7 @@
   /* ---------- Números de las secciones ---------- */
 
   // Seguidos aunque alguna sección esté oculta (Fechas sin viajes, Premios o
-  // Tienda vacíos): 01, 02, 03... sin saltos.
+  // Merch vacíos): 01, 02, 03... sin saltos.
   var numSeccion = 0;
   $$(".seccion").forEach(function (s) {
     var num = $(".seccion-num", s);
@@ -874,7 +874,7 @@
     });
   }
 
-  /* ---------- Modelos 3D (trofeos y tienda) ---------- */
+  /* ---------- Modelos 3D (trofeos y merch) ---------- */
 
   // El visor 3D (js/vendor/model-viewer-umd.min.js, unos 900 KB) solo se
   // descarga cuando alguien pide ver un modelo: así no gasta datos a nadie más.

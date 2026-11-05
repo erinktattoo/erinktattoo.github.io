@@ -1,5 +1,5 @@
 /* =====================================================================
-   TIENDA: LO QUE SE VENDE EN LA SECCIÓN "TIENDA"
+   MERCH: LO QUE SALE EN LA SECCIÓN "MERCH"
    ---------------------------------------------------------------------
    El cliente elige tallas y cantidades y pulsa "Pedir por WhatsApp": se
    abre WhatsApp con el pedido ya escrito (qué, cuántas, qué talla y el

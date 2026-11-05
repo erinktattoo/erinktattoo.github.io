@@ -1,6 +1,6 @@
-# ✏️ MODIFICAR: cambia erink.example.com por el dominio real de la web.
+# Web de ER·INK: https://erinktattoo.github.io
 User-agent: *
 Allow: /
 Disallow: /herramientas/
 
-Sitemap: https://erink.example.com/sitemap.xml
+Sitemap: https://erinktattoo.github.io/sitemap.xml

@@ -15,13 +15,13 @@ var TEXTOS = {
     lugar: "lugar",
     edicion: "edición",
     trofeo: "Trofeo del {puesto} lugar en {categoria}, {evento}",
-    // 3D (trofeos y tienda)
+    // 3D (trofeos y merch)
     ver3d: "Girar en 3D",
     cargando3d: "Cargando 3D…",
     error3d: "No se pudo cargar el 3D",
     error3dLocal: "El 3D se ve en la web publicada",
     modelo3d: "{nombre} en 3D: arrastra para girarlo",
-    // Tienda
+    // Merch
     fotos: "Fotos",
     tallaCantidad: "Talla y cantidad",
     cantidad: "Cantidad",
