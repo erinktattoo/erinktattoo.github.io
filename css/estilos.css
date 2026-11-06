@@ -949,22 +949,25 @@ html:not(.js) .menu-btn { display: none; }
   padding: 0;
   overflow: hidden;
   border: 0;
-  background: var(--superficie);
+  background: none;
   cursor: zoom-in;
 }
-.premio-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.premio-foto img { width: 100%; height: 100%; object-fit: cover; }
+/* El marco del portafolio, a 5 px del borde (la miniatura es pequeña) */
 .premio-foto::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border: 1px solid var(--linea-fuerte);
+  inset: 2px;
+  border: 8px solid transparent;
+  border-image: var(--marco-sm) 8 stretch;
+  opacity: 0;
   pointer-events: none;
-  transition: border-color .25s;
+  transition: opacity .25s, inset .25s;
 }
 .premio-foto:focus-visible { outline-offset: 2px; }
+.premio-foto:focus-visible::after { opacity: 1; inset: 5px; }
 @media (hover: hover) {
-  .premio-foto:hover img { transform: scale(1.06); }
-  .premio-foto:hover::after { border-color: var(--rojo); }
+  .premio-foto:hover::after { opacity: 1; inset: 5px; }
 }
 
 @media (min-width: 600px) {
@@ -1674,9 +1677,9 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
    js/app.js cuando el elemento llega a la pantalla.
    ===================================================================== */
 
-@property --barrido { syntax: "<angle>"; inherits: false; initial-value: 360deg; }
+@property --barrido { syntax: "<angle>"; inherits: false; initial-value: 180deg; }
 
-@keyframes barrido { from { --barrido: 0deg; } to { --barrido: 360deg; } }
+@keyframes barrido { from { --barrido: 0deg; } to { --barrido: 180deg; } }
 @keyframes subir { from { opacity: 0; transform: translateY(14px); } }
 @keyframes norte {
   0% { opacity: 0; transform: rotate(-220deg) scale(.7); }
@@ -1729,10 +1732,11 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* 1 · El marco se traza como la punta de un compás y después sale el texto */
+  /* 1 · El marco de la tarjeta se dibuja desde arriba, bajando por los dos
+     lados a la vez hasta juntarse abajo; después sale el texto */
   .portada-marco {
-    -webkit-mask: conic-gradient(#000 var(--barrido), transparent 0);
-    mask: conic-gradient(#000 var(--barrido), transparent 0);
+    -webkit-mask: conic-gradient(#000 var(--barrido), #0000 0 calc(360deg - var(--barrido)), #000 0);
+    mask: conic-gradient(#000 var(--barrido), #0000 0 calc(360deg - var(--barrido)), #000 0);
     animation: barrido 1.4s .15s cubic-bezier(.65, 0, .25, 1) both;
   }
   .portada-texto > * { animation: subir .7s cubic-bezier(.2, .7, .2, 1) both; }
@@ -1789,6 +1793,7 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
 @property --curva { syntax: "<length>"; inherits: false; initial-value: 0px; }
 .galeria-item img,
 .sobre-foto img,
+.premio-foto img,
 .vitrina .vista-3d > img,
 .vitrina .vista-3d model-viewer {
   --esquina: 8px;
@@ -1803,17 +1808,22 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
     radial-gradient(circle at calc(100% - var(--esquina)) var(--esquina), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 100% 0 / 51% 51% no-repeat,
     radial-gradient(circle at var(--esquina) calc(100% - var(--esquina)), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 0 100% / 51% 51% no-repeat,
     radial-gradient(circle at calc(100% - var(--esquina)) calc(100% - var(--esquina)), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 100% 100% / 51% 51% no-repeat;
-  transition: --encaje .3s ease, --curva .3s ease;
+  transition: --encaje .3s ease, --curva 0s;
 }
-/* Portafolio y trofeos: al pasar por encima (marco pequeño, a 8 px del borde) */
-.galeria-item:focus-visible img { --encaje: 9.25px; --curva: 8.5px; }
+.premio-foto img { --esquina: 5px; }
+/* Valores: el borde de la foto queda siempre debajo de la línea roja (que
+   tiene 1,5 px de grueso), para que no asome ningún píxel entre las dos.
+   Portafolio y trofeos: al pasar por encima (marco pequeño, a 8 px del borde) */
+.galeria-item:focus-visible img { --encaje: 8.9px; --curva: 7.8px; transition: --encaje .3s ease, --curva 0s .3s; }
+.premio-foto:focus-visible img { --encaje: 5.9px; --curva: 7.8px; transition: --encaje .3s ease, --curva 0s .3s; }
 @media (hover: hover) {
   .galeria-item:hover img,
   .vitrina .vista-3d:hover > img,
-  .vitrina .vista-3d:hover model-viewer { --encaje: 9.25px; --curva: 8.5px; }
+  .vitrina .vista-3d:hover model-viewer { --encaje: 8.9px; --curva: 7.8px; transition: --encaje .3s ease, --curva 0s .3s; }
+  .premio-foto:hover img { --encaje: 5.9px; --curva: 7.8px; transition: --encaje .3s ease, --curva 0s .3s; }
 }
 /* Sobre mí: siempre dentro del marco grande (también a 8 px del borde) */
-.sobre-foto img { --encaje: 14.5px; --curva: 19.5px; }
+.sobre-foto img { --encaje: 14px; --curva: 18.7px; }
 
 /* Trofeos: el mismo marco que las fotos del portafolio al pasar por encima */
 /* Los trofeos, sobre el negro de la página (sin recuadro gris) */
