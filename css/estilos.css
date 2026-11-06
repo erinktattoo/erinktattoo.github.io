@@ -91,6 +91,7 @@ body {
   background: var(--negro);
   color: var(--texto);
   font: 1rem/1.6 var(--f-texto);
+  overflow-x: hidden; /* navegadores antiguos */
   overflow-x: clip;
 }
 
@@ -1016,14 +1017,19 @@ html:not(.js) .menu-btn { display: none; }
 /* "Girar en 3D" es el botón .btn-linea de la web; aquí solo se coloca */
 .ver-3d {
   position: absolute;
-  left: 50%;
+  /* Centrado con márgenes automáticos (y no con "translate", que los
+     navegadores de antes de 2022 no entienden y dejaban el botón corrido) */
+  left: 0;
+  right: 0;
   bottom: 18px;
   z-index: 2;
-  width: max-content; /* centrado con left 50%: sin esto se encoge y el icono desaparece */
+  width: max-content; /* sin esto ocupa todo el ancho */
+  max-width: calc(100% - 24px);
+  margin-left: auto;
+  margin-right: auto;
   min-height: 48px;
   font-size: .72rem;
   white-space: nowrap;
-  translate: -50% 0;
 }
 .ver-3d svg { width: 16px; height: 16px; flex: none; }
 .ver-3d:disabled,
@@ -1150,7 +1156,7 @@ html:not(.js) .menu-btn { display: none; }
   background: rgba(11, 11, 13, .8);
   color: var(--texto);
   cursor: pointer;
-  translate: 0 -50%;
+  margin-top: -22px; /* la mitad de su alto: centrada (sin "translate", por los navegadores antiguos) */
   transition: opacity .2s;
 }
 .slider-flecha svg { width: 22px; height: 22px; }
@@ -1835,6 +1841,17 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
 }
 /* Sobre mí: siempre dentro del marco grande (también a 8 px del borde) */
 .sobre-foto img { --encaje: 14px; --curva: 18.7px; }
+/* Navegadores de antes de 2022 (por ejemplo, el de algunos Samsung como el
+   J7 Prime): sin la máscara de las esquinas, que en ellos dejaba la foto en
+   negro. La foto sale entera; en Sobre mí, igualmente dentro del marco. */
+@supports not (translate: 0) {
+  .galeria-item img,
+  .sobre-foto img,
+  .premio-foto img,
+  .vitrina .vista-3d > img,
+  .vitrina .vista-3d model-viewer { clip-path: none; -webkit-mask: none; mask: none; }
+  .sobre-foto img { padding: 14px; }
+}
 
 /* Trofeos: el mismo marco que las fotos del portafolio al pasar por encima */
 /* Los trofeos, sobre el negro de la página (sin recuadro gris) */
