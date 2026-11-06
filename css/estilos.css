@@ -419,10 +419,18 @@ html:not(.js) .menu-btn { display: none; }
 }
 .cara-frente { gap: 18px; }
 .cara-dorso { gap: 14px; padding: 34px 30px 40px; transform: rotateY(180deg); }
-/* Todo lo de dentro de cada cara también se esconde al quedar de espaldas: si
-   no, algunos móviles enseñan el botón "Voltear" de la otra cara, al revés. */
-.cara *,
-.foto-cara * { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+/* La cara que queda detrás se oculta del todo (con lo que lleva dentro) justo
+   cuando la tarjeta está de canto: con esta curva, a los 0,17 s de los 0,9 s
+   del giro. Si no, algunos móviles enseñan al revés el botón "Voltear" de la
+   otra cara (esconder "de espaldas" no les llega a lo de dentro). */
+.cara,
+.foto-cara { transition: visibility 0s .17s; }
+.cara-dorso,
+.foto-cara-dorso { visibility: hidden; }
+.tarjeta-giro.volteada .cara-frente,
+.foto-giro.volteada .foto-cara:not(.foto-cara-dorso) { visibility: hidden; }
+.tarjeta-giro.volteada .cara-dorso,
+.foto-giro.volteada .foto-cara-dorso { visibility: visible; }
 .portada-marco,
 .giro-marco { position: absolute; inset: 10px; z-index: 1; pointer-events: none; }
 .giro-logo { width: 46%; aspect-ratio: 1; height: auto; }
@@ -1846,11 +1854,12 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
   .vitrina .vista-3d:hover::after { opacity: 1; inset: 8px; }
 }
 
-/* Trofeos: la misma animación al pasar por encima, más lenta y suave */
-.vitrina .vista-3d::after { transition: opacity .6s cubic-bezier(.22, .61, .36, 1), inset .6s cubic-bezier(.22, .61, .36, 1); }
+/* Trofeos: la misma animación al pasar por encima, lenta y suave (arranca y
+   frena despacio); el marco se acerca menos (de 6 a 8 px) para que no salte */
+.vitrina .vista-3d::after { inset: 6px; transition: opacity .9s cubic-bezier(.4, 0, .2, 1), inset .9s cubic-bezier(.4, 0, .2, 1); }
 .vitrina .vista-3d > img,
-.vitrina .vista-3d model-viewer { transition: --encaje .6s cubic-bezier(.22, .61, .36, 1), --curva 0s; }
+.vitrina .vista-3d model-viewer { transition: --encaje .9s cubic-bezier(.4, 0, .2, 1), --curva 0s; }
 @media (hover: hover) {
   .vitrina .vista-3d:hover > img,
-  .vitrina .vista-3d:hover model-viewer { transition: --encaje .6s cubic-bezier(.22, .61, .36, 1), --curva 0s .6s; }
+  .vitrina .vista-3d:hover model-viewer { transition: --encaje .9s cubic-bezier(.4, 0, .2, 1), --curva 0s .9s; }
 }
