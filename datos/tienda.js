@@ -35,7 +35,7 @@ var TIENDA = [
       { foto: "camisa-frente", texto: "Delante", texto_en: "Front" },
       { foto: "camisa-espalda", texto: "Detrás", texto_en: "Back" },
     ],
-    vista: "voltear",
+    vista: "deslizar",
     modelo: "camiseta_maniqui",
     tallas: ["M", "L", "XL"],
   },
