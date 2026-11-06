@@ -155,7 +155,8 @@
   var listaGaleria = $("#galeria");
   var cajaFiltros = $("#filtros");
   var btnMas = $("#ver-mas");
-  var POR_TANDA = 12; // fotos que se cargan de golpe; el resto con "Ver más"
+  // Fotos que se cargan de golpe (el resto con "Ver más"): 6 en el móvil, 12 en pantallas grandes.
+  var POR_TANDA = window.matchMedia && matchMedia("(max-width: 599px)").matches ? 6 : 12;
   var filtro = "todos";
   var visibles = [];
   var mostrados = 0;
@@ -549,32 +550,75 @@
       };
     }
     var vista = el("div", { class: "producto-vista" });
-    var zonaFotos = null, zona3D = null, actualFoto = 0;
-    if (fotos.length) {
-      var grande = el("img", {
-        src: rutaTienda(fotos[0].foto, 960), alt: fotoVisor(fotos[0]).alt,
-        srcset: fotoVisor(fotos[0]).srcset, sizes: "(min-width: 900px) 520px, 100vw",
-        width: "960", height: "1200", loading: "lazy", decoding: "async"
+    var zonaFotos = null, zona3D = null;
+
+    function imagenTienda(f) {
+      return el("img", {
+        src: rutaTienda(f.foto, 960), srcset: fotoVisor(f).srcset, sizes: "(min-width: 900px) 520px, 100vw",
+        alt: fotoVisor(f).alt, width: "960", height: "1200", loading: "lazy", decoding: "async"
       });
-      var botonGrande = el("button", { type: "button", class: "foto-grande" }, grande);
-      botonGrande.addEventListener("click", function () { abrirVisor(fotos.map(fotoVisor), actualFoto, botonGrande); });
-      var minis = el("div", { class: "miniaturas" });
-      fotos.forEach(function (f, i) {
-        var b = el("button", { type: "button", class: "miniatura", "aria-pressed": String(i === 0), "aria-label": vistaDe(f) || String(i + 1) }, [
-          el("img", { src: rutaTienda(f.foto, 480), alt: "", width: "96", height: "120", loading: "lazy" }),
-          vistaDe(f) ? el("span", null, vistaDe(f)) : null
-        ]);
-        b.addEventListener("click", function () {
-          actualFoto = i;
-          grande.srcset = fotoVisor(f).srcset;
-          grande.src = rutaTienda(f.foto, 960);
-          grande.alt = fotoVisor(f).alt;
-          $$(".miniatura", minis).forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
-        });
-        minis.appendChild(b);
-      });
-      zonaFotos = el("div", { class: "producto-fotos" }, [botonGrande, fotos.length > 1 ? minis : null]);
     }
+
+    // Delante y detrás: la foto se da la vuelta como la tarjeta de la portada.
+    function fotosVoltear() {
+      var caras = fotos.slice(0, 2).map(function (f, i) {
+        return el("div", { class: "foto-cara" + (i ? " foto-cara-dorso" : ""), "aria-hidden": i ? "true" : null }, [
+          imagenTienda(f),
+          vistaDe(f) ? el("span", { class: "foto-etiqueta" }, vistaDe(f)) : null,
+          el("button", { type: "button", class: "voltear", "aria-pressed": "false", "aria-label": T.voltearFoto },
+            [icono("i-girar"), el("span", null, T.voltear)])
+        ]);
+      });
+      caras[1].setAttribute("inert", "");
+      var giro = el("div", { class: "foto-giro", role: "group", "aria-label": nombre }, el("div", { class: "foto-giro-in" }, caras));
+      giro.addEventListener("click", function () {
+        var atras = !giro.classList.contains("volteada");
+        giro.classList.toggle("volteada", atras);
+        $$(".voltear", giro).forEach(function (b) { b.setAttribute("aria-pressed", String(atras)); });
+        caras[0].toggleAttribute("inert", atras);
+        caras[0].setAttribute("aria-hidden", String(atras));
+        caras[1].toggleAttribute("inert", !atras);
+        caras[1].setAttribute("aria-hidden", String(!atras));
+      });
+      return el("div", { class: "producto-fotos" }, giro);
+    }
+
+    // Las fotos se pasan de lado (con el dedo, las flechas o los botones de abajo).
+    function fotosDeslizar() {
+      var pista = el("div", { class: "slider-pista", tabindex: "0", role: "group", "aria-label": nombre });
+      var puntos = el("div", { class: "slider-puntos" });
+      var actual = 0;
+      var ant = el("button", { type: "button", class: "slider-flecha slider-ant", "aria-label": T.fotoAnterior }, icono("i-izq"));
+      var sig = el("button", { type: "button", class: "slider-flecha slider-sig", "aria-label": T.fotoSiguiente }, icono("i-der"));
+      function ir(i) {
+        i = Math.max(0, Math.min(fotos.length - 1, i));
+        pista.scrollTo({ left: i * pista.clientWidth, behavior: "smooth" });
+      }
+      function marcar() {
+        actual = Math.round(pista.scrollLeft / Math.max(1, pista.clientWidth));
+        $$("button", puntos).forEach(function (b, i) { b.setAttribute("aria-current", String(i === actual)); });
+        ant.disabled = actual === 0;
+        sig.disabled = actual === fotos.length - 1;
+      }
+      fotos.forEach(function (f, i) {
+        var b = el("button", { type: "button", class: "foto-slide" }, imagenTienda(f));
+        b.addEventListener("click", function () { abrirVisor(fotos.map(fotoVisor), i, b); });
+        pista.appendChild(b);
+        var punto = el("button", { type: "button", "aria-current": String(i === 0) }, vistaDe(f) || String(i + 1));
+        punto.addEventListener("click", function () { ir(i); });
+        puntos.appendChild(punto);
+      });
+      ant.addEventListener("click", function () { ir(actual - 1); });
+      sig.addEventListener("click", function () { ir(actual + 1); });
+      pista.addEventListener("scroll", function () { requestAnimationFrame(marcar); }, { passive: true });
+      marcar();
+      return el("div", { class: "producto-fotos foto-slider" }, [
+        el("div", { class: "slider-marco" }, [pista, ant, sig]),
+        fotos.length > 1 ? puntos : null
+      ]);
+    }
+
+    if (fotos.length) zonaFotos = (p.vista === "voltear" && fotos.length === 2) ? fotosVoltear() : fotosDeslizar();
     if (p.modelo) zona3D = caja3D(p.modelo, nombre, p.orbita || "25deg 82deg auto");
 
     if (zonaFotos && zona3D) {
@@ -881,19 +925,19 @@
   // queda detrás se marca "inert" para que sus enlaces no se puedan tocar.
   var tarjetaGiro = $("#tarjeta-giro");
   if (tarjetaGiro) {
-    var btnVoltear = $(".voltear", tarjetaGiro);
+    var botonesVoltear = $$(".voltear", tarjetaGiro); // uno en cada cara: giran con ella
     var caraFrente = $(".cara-frente", tarjetaGiro);
     var caraDorso = $(".cara-dorso", tarjetaGiro);
     var voltearTarjeta = function () {
       var atras = !tarjetaGiro.classList.contains("volteada");
       tarjetaGiro.classList.toggle("volteada", atras);
-      btnVoltear.setAttribute("aria-pressed", String(atras));
+      botonesVoltear.forEach(function (b) { b.setAttribute("aria-pressed", String(atras)); });
       caraFrente.toggleAttribute("inert", atras);
       caraFrente.setAttribute("aria-hidden", String(atras));
       caraDorso.toggleAttribute("inert", !atras);
       caraDorso.setAttribute("aria-hidden", String(!atras));
     };
-    btnVoltear.addEventListener("click", voltearTarjeta);
+    botonesVoltear.forEach(function (b) { b.addEventListener("click", voltearTarjeta); });
     tarjetaGiro.addEventListener("click", function (e) {
       if (!e.target.closest("a, button")) voltearTarjeta();
     });
@@ -933,7 +977,7 @@
 
   // Caja con la imagen del modelo y el botón "Girar en 3D".
   function caja3D(modelo, nombre, orbita) {
-    var boton = el("button", { type: "button", class: "ver-3d" }, [icono("i-3d"), el("span", null, T.ver3d)]);
+    var boton = el("button", { type: "button", class: "btn-linea ver-3d" }, [icono("i-3d"), el("span", null, T.ver3d)]);
     var caja = el("div", { class: "vista-3d", "data-modelo": modelo, "data-orbita": orbita || "" }, [
       el("img", { src: rutaModelo(modelo, "webp"), alt: "", width: "480", height: "600", loading: "lazy", decoding: "async" }),
       boton

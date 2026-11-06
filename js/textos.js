@@ -36,6 +36,10 @@ var TEXTOS = {
     pedir: "Pedir por WhatsApp",
     notaPedido: "Se abre WhatsApp con el pedido escrito: revísalo y pulsa enviar.",
     fotoDe: "{nombre}: {vista}",
+    voltear: "Voltear",
+    voltearFoto: "Dar la vuelta a la foto",
+    fotoAnterior: "Foto anterior",
+    fotoSiguiente: "Foto siguiente",
     msgPedido: {
       saludo: "Hola ER·INK, quiero pedir:",
       linea: "• {n} × {nombre}, talla {talla}",
@@ -109,6 +113,10 @@ var TEXTOS = {
     pedir: "Order on WhatsApp",
     notaPedido: "WhatsApp opens with your order written out: check it and tap send.",
     fotoDe: "{nombre}: {vista}",
+    voltear: "Flip",
+    voltearFoto: "Turn the photo around",
+    fotoAnterior: "Previous photo",
+    fotoSiguiente: "Next photo",
     msgPedido: {
       saludo: "Hi ER·INK, I'd like to order:",
       linea: "• {n} × {nombre}, size {talla}",

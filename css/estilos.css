@@ -481,7 +481,7 @@ html:not(.js) .menu-btn { display: none; }
 .giro-tel:hover .giro-tel-num { color: var(--rojo-texto); }
 .giro-raya { width: 64%; height: 9px; flex: none; background: var(--linea-centro); }
 
-/* Botón "Voltear": no gira con la tarjeta */
+/* Botón "Voltear": va dentro de cada cara y gira con la tarjeta */
 .voltear {
   position: absolute;
   right: 26px;
@@ -734,12 +734,8 @@ html:not(.js) .menu-btn { display: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .5s ease;
 }
 .galeria-item:focus-visible { outline-offset: -3px; }
-@media (hover: hover) {
-  .galeria-item:hover img { transform: scale(1.04); }
-}
 .sin-foto-txt {
   position: absolute;
   inset: auto 8px 8px;
@@ -1004,32 +1000,21 @@ html:not(.js) .menu-btn { display: none; }
 .vista-3d model-viewer { --poster-color: transparent; background: transparent; }
 .vista-3d.activa > img,
 .vista-3d.activa .ver-3d { display: none; }
+/* "Girar en 3D" es el botón .btn-linea de la web; aquí solo se coloca */
 .ver-3d {
   position: absolute;
   left: 50%;
-  bottom: 14px;
+  bottom: 18px;
   z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 40px;
-  padding: 0 14px;
-  border: 1px solid var(--rojo);
-  background: rgba(11, 11, 13, .85);
-  color: var(--texto);
-  font: 700 .7rem/1 var(--f-texto);
-  letter-spacing: .16em;
-  text-transform: uppercase;
   width: max-content; /* centrado con left 50%: sin esto se encoge y el icono desaparece */
+  min-height: 48px;
+  font-size: .72rem;
   white-space: nowrap;
-  cursor: pointer;
-  transform: translateX(-50%);
-  transition: background-color .2s, color .2s;
+  translate: -50% 0;
 }
-.ver-3d svg { width: 16px; height: 16px; flex: none; color: var(--rojo-texto); }
-.ver-3d:hover:not(:disabled) { background: var(--rojo); color: #fff; }
-.ver-3d:hover:not(:disabled) svg { color: #fff; }
-.ver-3d:disabled { border-color: var(--linea-fuerte); color: var(--gris); cursor: default; }
+.ver-3d svg { width: 16px; height: 16px; flex: none; }
+.ver-3d:disabled,
+.ver-3d:disabled:hover { --boton: var(--boton-linea); --rombo-boton: var(--rombo); color: var(--gris); cursor: default; transform: none; animation: none; }
 .vista-3d.cargando .ver-3d svg { animation: girar-3d 1s linear infinite; }
 @keyframes girar-3d { to { transform: rotate(360deg); } }
 
@@ -1087,34 +1072,92 @@ html:not(.js) .menu-btn { display: none; }
 .vista-tabs svg { width: 16px; height: 16px; }
 .vista-tabs button[aria-pressed="true"] { background: var(--rojo); color: #fff; }
 .vista-tabs button:not([aria-pressed="true"]):hover { color: var(--texto); }
-.foto-grande {
-  display: block;
-  width: 100%;
+/* La foto se da la vuelta como la tarjeta de la portada (delante / detrás) */
+.foto-giro {
+  position: relative;
   aspect-ratio: 4 / 5;
-  padding: 0;
-  border: 0;
-  background: #f2f2f2;
-  cursor: zoom-in;
+  max-width: 100%;
+  perspective: 1600px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
-.foto-grande img { width: 100%; height: 100%; object-fit: contain; }
-.miniaturas { display: flex; gap: 10px; margin-top: 10px; }
-.miniatura {
+.foto-giro-in {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.3, .7, .2, 1);
+}
+.foto-giro.volteada .foto-giro-in { transform: rotateY(180deg); }
+.foto-cara {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #f2f2f2;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.foto-cara-dorso { transform: rotateY(180deg); }
+.foto-cara img { width: 100%; height: 100%; object-fit: contain; }
+.foto-cara .voltear { right: 14px; bottom: 14px; }
+.foto-etiqueta {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 10px;
+  background: rgba(11, 11, 13, .82);
+  color: var(--texto);
+  font: 700 .66rem/1 var(--f-texto);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+@media (prefers-reduced-motion: reduce) { .foto-giro-in { transition: none; } }
+
+/* O se pasan de lado, como un carrusel */
+.slider-marco { position: relative; }
+.slider-pista {
+  display: flex;
+  aspect-ratio: 4 / 5;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: #f2f2f2;
+}
+.slider-pista::-webkit-scrollbar { display: none; }
+.foto-slide { flex: 0 0 100%; padding: 0; border: 0; background: none; cursor: zoom-in; scroll-snap-align: start; }
+.foto-slide img { width: 100%; height: 100%; object-fit: contain; }
+.slider-flecha {
+  position: absolute;
+  top: 50%;
   display: grid;
-  gap: 4px;
-  width: 76px;
-  padding: 0;
+  place-items: center;
+  width: 44px;
+  height: 44px;
   border: 0;
+  background: rgba(11, 11, 13, .8);
+  color: var(--texto);
+  cursor: pointer;
+  translate: 0 -50%;
+  transition: opacity .2s;
+}
+.slider-flecha svg { width: 22px; height: 22px; }
+.slider-flecha:hover { color: var(--rojo-texto); }
+.slider-flecha:disabled { opacity: 0; pointer-events: none; }
+.slider-ant { left: 10px; }
+.slider-sig { right: 10px; }
+.slider-puntos { display: flex; gap: 8px; margin-top: 10px; }
+.slider-puntos button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--linea-fuerte);
   background: none;
   color: var(--gris);
-  font: 700 .62rem/1.2 var(--f-texto);
-  letter-spacing: .14em;
+  font: 700 .66rem/1 var(--f-texto);
+  letter-spacing: .16em;
   text-transform: uppercase;
   cursor: pointer;
 }
-.miniatura img { width: 100%; aspect-ratio: 4 / 5; object-fit: contain; background: #f2f2f2; border: 2px solid transparent; opacity: .65; transition: opacity .2s, border-color .2s; }
-.miniatura[aria-pressed="true"] { color: var(--texto); }
-.miniatura[aria-pressed="true"] img { border-color: var(--rojo); opacity: 1; }
-.miniatura:hover img { opacity: 1; }
+.slider-puntos button[aria-current="true"] { border-color: var(--rojo); color: var(--texto); }
 
 .producto-info { min-width: 0; }
 .seccion .producto-info h3 { font-size: clamp(2.2rem, 9vw, 3rem); line-height: 1; text-transform: uppercase; }
@@ -1287,7 +1330,7 @@ html:not(.js) .menu-btn { display: none; }
   font: inherit;
   font-size: 1rem; /* 16px: evita que el iPhone haga zoom al escribir */
 }
-.campo textarea { min-height: 140px; resize: vertical; }
+.campo textarea { min-height: 140px; resize: none; }
 .tel-prefijo { display: flex; gap: 8px; }
 /* El prefijo, estrecho: cerrado solo enseña "+53" (ver llenarPrefijos en js/app.js) */
 .campo .tel-prefijo select { flex: 0 0 auto; width: 4.9em; min-width: 0; padding-left: 10px; padding-right: 24px; background-position: right 6px center; }
@@ -1491,10 +1534,13 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
 .cuidados { display: grid; gap: 28px; }
 .cuidado { padding-top: 24px; background: var(--linea-centro-arriba); }
 .cuidado h3 { margin-bottom: 14px; }
+/* Un aviso, no un campo para escribir: raya roja a la izquierda y fondo
+   apenas rojizo, sin el borde gris de los campos del formulario. */
 .nota-medica {
   margin: 36px 0 0;
-  padding: 14px 16px;
-  border: 1px solid var(--linea-fuerte);
+  padding: 14px 16px 14px 18px;
+  border-left: 3px solid var(--rojo);
+  background: rgba(227, 25, 47, .08);
   color: var(--gris);
   font-size: .9rem;
 }
@@ -1666,7 +1712,8 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
 @keyframes trazo { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 @keyframes aparecer { from { opacity: 0; transform: translateY(18px) scale(.96); } }
 
-/* 5 · El marco de la tarjeta rodea la foto al pasar por encima */
+/* 5 · El marco de la tarjeta rodea la foto al pasar por encima, y la foto
+   se mete dentro de sus líneas (ver "Fotos dentro del marco") */
 .galeria-item::after {
   content: "";
   position: absolute;
@@ -1733,3 +1780,54 @@ button.dia:focus-visible { outline: 2px solid var(--texto); outline-offset: 1px;
 }
 .animable .galeria.visto li { animation-play-state: running; }
 
+/* ---------- Fotos dentro del marco ---------- */
+
+/* La foto se recorta justo por dentro de la línea del marco, con las
+   esquinas curvas hacia dentro como las del marco.
+   --encaje: cuánto se recorta por cada lado · --curva: radio de las esquinas
+   --esquina: dónde está la esquina del marco (el centro de las curvas). */
+@property --encaje { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --curva { syntax: "<length>"; inherits: false; initial-value: 0px; }
+.galeria-item img,
+.sobre-foto img,
+.vitrina .vista-3d > img,
+.vitrina .vista-3d model-viewer {
+  --esquina: 8px;
+  clip-path: inset(var(--encaje));
+  -webkit-mask:
+    radial-gradient(circle at var(--esquina) var(--esquina), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 0 0 / 51% 51% no-repeat,
+    radial-gradient(circle at calc(100% - var(--esquina)) var(--esquina), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 100% 0 / 51% 51% no-repeat,
+    radial-gradient(circle at var(--esquina) calc(100% - var(--esquina)), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 0 100% / 51% 51% no-repeat,
+    radial-gradient(circle at calc(100% - var(--esquina)) calc(100% - var(--esquina)), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 100% 100% / 51% 51% no-repeat;
+  mask:
+    radial-gradient(circle at var(--esquina) var(--esquina), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 0 0 / 51% 51% no-repeat,
+    radial-gradient(circle at calc(100% - var(--esquina)) var(--esquina), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 100% 0 / 51% 51% no-repeat,
+    radial-gradient(circle at var(--esquina) calc(100% - var(--esquina)), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 0 100% / 51% 51% no-repeat,
+    radial-gradient(circle at calc(100% - var(--esquina)) calc(100% - var(--esquina)), #0000 var(--curva), #000 calc(var(--curva) + .5px)) 100% 100% / 51% 51% no-repeat;
+  transition: --encaje .3s ease, --curva .3s ease;
+}
+/* Portafolio y trofeos: al pasar por encima (marco pequeño, a 8 px del borde) */
+.galeria-item:focus-visible img { --encaje: 9.25px; --curva: 8.5px; }
+@media (hover: hover) {
+  .galeria-item:hover img,
+  .vitrina .vista-3d:hover > img,
+  .vitrina .vista-3d:hover model-viewer { --encaje: 9.25px; --curva: 8.5px; }
+}
+/* Sobre mí: siempre dentro del marco grande (también a 8 px del borde) */
+.sobre-foto img { --encaje: 14.5px; --curva: 19.5px; }
+
+/* Trofeos: el mismo marco que las fotos del portafolio al pasar por encima */
+.vitrina .vista-3d::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  z-index: 1;
+  border: 8px solid transparent;
+  border-image: var(--marco-sm) 8 stretch;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, inset .25s;
+}
+@media (hover: hover) {
+  .vitrina .vista-3d:hover::after { opacity: 1; inset: 8px; }
+}

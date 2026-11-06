@@ -11,7 +11,9 @@
      moneda                       → "USD"
      descripcion / descripcion_en → una frase sobre el producto
      fotos   → las fotos (en img/tienda/, cada una en -480.webp y -960.webp);
-               texto es lo que sale debajo de la miniatura ("Delante"...)
+               texto es lo que sale encima de cada foto ("Delante"...)
+     vista   → "voltear": con 2 fotos, la foto se da la vuelta como la tarjeta
+               de la portada; "deslizar": se pasan de lado, como un carrusel
      modelo  → el modelo 3D de la carpeta modelos/ (sin el ".glb"), con una
                imagen del mismo nombre en .webp; "" si no hay 3D
      tallas  → las tallas que hay; [] si no tiene tallas (sale "Cantidad")
@@ -33,6 +35,7 @@ var TIENDA = [
       { foto: "camisa-frente", texto: "Delante", texto_en: "Front" },
       { foto: "camisa-espalda", texto: "Detrás", texto_en: "Back" },
     ],
+    vista: "voltear",
     modelo: "camiseta_maniqui",
     tallas: ["M", "L", "XL"],
   },
